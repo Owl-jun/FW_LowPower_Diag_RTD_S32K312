@@ -3,6 +3,13 @@
 NXP S32K312에서 UART 명령, ADC/DMA 측정, LED/PWM 제어, Standby wakeup과 watchdog을 통합한 개인 임베디드 프로젝트입니다. RTD 주변기기 동작을 확인하는 코드에서 출발해, 애플리케이션 정책과 하드웨어 접근을 분리하고 인터럽트 처리 범위와 설정 의존성을 정리했습니다.
 
 RTOS 없이 실행하는 **bare-metal superloop** 구조입니다. AUTOSAR 계열 RTD API를 사용하지만 AUTOSAR OS·RTE를 구성한 프로젝트는 아닙니다.
+## 동작 사진
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
 
 ## 주요 기능
 
