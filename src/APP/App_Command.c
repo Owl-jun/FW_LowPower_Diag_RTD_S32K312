@@ -1,8 +1,17 @@
 #include "App_Command.h"
 #include "../APP_CFG.h"
-#include "App_Standby.h"
+
+#if (UART_ENABLE == CFG_ENABLE)
 #include "../platform/Uart_Port.h"
-#include "../PWM/App_Pwm.h"
+#endif
+
+#if (STANDBY_ENABLE == CFG_ENABLE)
+#include "App_Standby.h"
+#endif
+
+#if (PWM_ENABLE == CFG_ENABLE)
+#include "App_Pwm.h"
+#endif
 
 #define APP_COMMAND_NONE 0xFFU
 #define APP_COMMAND_PAYLOAD_LENGTH 6U
@@ -18,12 +27,18 @@ static void App_Command_Execute(uint8 command)
 {
     if (command == 0U)
     {
+#if (UART_ENABLE == CFG_ENABLE && UART_LOG_ENABLE == CFG_ENABLE)
         (void)Plat_Uart_Send("Collect Command Key, Turn On Red LED");
+#endif
+#if (PWM_ENABLE == CFG_ENABLE)
         App_Pwm_On_RedLed(CFG_ON);
+#endif
     }
     else if (command == 1U)
     {
+#if (STANDBY_ENABLE == CFG_ENABLE)
         App_Standby_Enter();
+#endif
     }
 }
 
@@ -34,8 +49,9 @@ void App_Command_Process(void)
 
     for (consumed = 0U; consumed < APP_COMMAND_RX_BUDGET; consumed++)
     {
+#if (UART_ENABLE == CFG_ENABLE)
         if (Plat_Uart_Read(&byte, 1U) == 0U) { break; }
-
+#endif
         if (App_Command_Id == APP_COMMAND_NONE)
         {
             if ((byte == '0') || (byte == '1'))

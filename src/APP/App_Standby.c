@@ -1,5 +1,6 @@
 #include "App_Standby.h"
 #include "../APP_CFG.h"
+#if (STANDBY_ENABLE == CFG_ENABLE)
 
 #if (UART_ENABLE == CFG_ENABLE)
 #include "../platform/Uart_Port.h"
@@ -15,7 +16,6 @@ volatile App_Standby_BootInfoType App_Standby_BootInfo;
 
 #define APP_STANDBY_WKPU_MASK (1UL << 3U)
 
-#if (STANDBY_ENABLE == CFG_ENABLE)
 
 #if (ADC_ENABLE == CFG_ENABLE)
 #include "../platform/Adc_Port.h"

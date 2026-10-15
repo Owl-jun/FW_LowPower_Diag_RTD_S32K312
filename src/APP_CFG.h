@@ -26,6 +26,7 @@
 	#define	ADC_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use DMA_ENABLE option */
 	#define _DEBUG_ADC_						(CFG_ON)
 	#define	DMA_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use ADC_ENABLE option */
+	#define	PWM_ENABLE						(CFG_ENABLE)
 #elif (BUILD_MODE == BM_RELEASE)
 	#define INIT_BOOT_MODE					(BOOT_RUN)
 	#define WATCHDOG_ENABLE 				(CFG_ENABLE)
@@ -36,6 +37,7 @@
 	#define	ADC_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use DMA_ENABLE option */
 	#define _DEBUG_ADC_						(CFG_OFF)
 	#define	DMA_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use ADC_ENABLE option */
+	#define	PWM_ENABLE						(CFG_ENABLE)
 #else
 #endif
 

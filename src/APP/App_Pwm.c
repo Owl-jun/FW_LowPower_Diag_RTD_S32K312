@@ -7,30 +7,38 @@
 
 #include "App_Pwm.h"
 
-#include "Dio.h"
-#include "Pwm.h"
+#if (PWM_ENABLE == CFG_ENABLE)
+#include "../platform/Button_Port.h"
+#include "../platform/Pwm_Port.h"
 
+#if (UART_LOG_ENABLE == CFG_ENABLE  \
+	&& UART_ENABLE == CFG_ENABLE 	)
 #include "../platform/Uart_Port.h"
+#endif
 
 #define DEBOUNCE_CNT 					(10000U)
-#define DUTY_CYCLE_100_PERCENT			(0x8000U)
+#define DUTY_CYCLE_100_PERCENT            (PLAT_PWM_DUTY_FULL_SCALE)
 #define DUTY_CONVERT_LOGIC(u8BtnCnt)	(((DUTY_CYCLE_100_PERCENT * (u8BtnCnt * 10U))) / 100U)
 
 void App_Pwm_On_RedLed(uint8_t cmd)
 {
-	if (cmd) { Pwm_SetDutyCycle(PwmChannel_0, DUTY_CYCLE_100_PERCENT); }
-	else { Pwm_SetDutyCycle(PwmChannel_0, 0U); }
+	if (cmd) { Plat_Pwm_SetRedDuty(DUTY_CYCLE_100_PERCENT); }
+	else { Plat_Pwm_SetRedDuty(0U); }
 }
 
 void App_Pwm_Process(void)
 {
+#if (UART_LOG_ENABLE == CFG_ENABLE  \
+	&& UART_ENABLE == CFG_ENABLE 	)
+	static char msg[32];
+#endif
 	static uint8_t u8BtnCnt = 0U;
 	static uint32_t u32Debounce = 0U;
 	static uint8_t u8Stop = 0U;
-	Dio_LevelType tState;
+	boolean tState;
 
 	/* Polling Btn State */
-	tState = Dio_ReadChannel(DioConf_DioChannel_PTB19);
+	tState = Plat_Button_IsPwmInputHigh();
 
 	if (!u8Stop)
 	{
@@ -41,18 +49,18 @@ void App_Pwm_Process(void)
 			if (u32Debounce >= DEBOUNCE_CNT)
 			{
 				u8BtnCnt = (u8BtnCnt + 1U) % (11U);
-
-				Pwm_SetDutyCycle(PwmChannel_0, DUTY_CONVERT_LOGIC(u8BtnCnt));
-				Pwm_SetDutyCycle(PwmChannel_1, DUTY_CONVERT_LOGIC(u8BtnCnt));
-				char msg[32];
+				Plat_Pwm_SetPairDuty(DUTY_CONVERT_LOGIC(u8BtnCnt));
 
 				/* Percent in hundredths, rounded; no float printf support needed. */
 				uint32_t duty = (DUTY_CONVERT_LOGIC(u8BtnCnt) * 10000U
 						+ DUTY_CYCLE_100_PERCENT / 2U) / DUTY_CYCLE_100_PERCENT;
 
+#if (UART_LOG_ENABLE == CFG_ENABLE  \
+	&& UART_ENABLE == CFG_ENABLE 	)
 				snprintf(msg, sizeof(msg), "Cur Duty Cycle : %u.%02u%%",
 						(unsigned int)(duty / 100U), (unsigned int)(duty % 100U));
 				(void)Plat_Uart_Send(msg);
+#endif
 
 				u8Stop = 1U;
 			}
@@ -76,4 +84,5 @@ void App_Pwm_Process(void)
 		}
 	}
 }
+#endif
 

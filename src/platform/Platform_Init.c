@@ -22,7 +22,9 @@
 
 void Plat_InitHardware(void)
 {
+#if (ADC_ENABLE == CFG_ENABLE && DMA_ENABLE == CFG_ENABLE)
 	Adc_ValueGroupType * ptrDmaBuf = Plat_Adc_Get_Dma_Result_Buf();
+#endif
 
 	/* MCU in RTD Module INIT */
 	Mcu_Init(NULL_PTR);
@@ -68,6 +70,7 @@ void Plat_InitHardware(void)
 	/* Create Clock BUS */
 	Mcl_Init(NULL_PTR);
 
+#if (PWM_ENABLE == CFG_ENABLE)
 	/* PWM */
 	Pwm_Init(NULL_PTR);
 
@@ -75,6 +78,7 @@ void Plat_InitHardware(void)
 	Icu_Init(NULL_PTR);
 	Icu_EnableNotification(IcuChannel_0);
 	Icu_EnableEdgeDetection(IcuChannel_0);
+#endif
 
 #if (UART_ENABLE == CFG_ENABLE)
 	/* UART */

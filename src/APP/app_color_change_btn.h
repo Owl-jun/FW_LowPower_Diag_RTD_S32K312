@@ -8,6 +8,7 @@
 #ifndef _APP_COLOR_CHANGE_BTN_H_
 #define _APP_COLOR_CHANGE_BTN_H_
 
+#include "../APP_CFG.h"
 void ISR_BTN_Handler(void);
 
 #endif
