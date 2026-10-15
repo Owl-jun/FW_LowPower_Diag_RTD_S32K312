@@ -3006,7 +3006,7 @@
                                  <setting name="dmaLogicChannel_LogicName" value="DMA_LOGIC_CH_0"/>
                                  <setting name="dmaLogicChannel_HwInstId" value="DMA_IP_HW_INST_0"/>
                                  <setting name="dmaLogicChannel_HwChId" value="DMA_IP_HW_CH_0"/>
-                                 <setting name="dmaLogicChannel_InterruptCallback" value="ISR_DMA_CALLBACK"/>
+                                 <setting name="dmaLogicChannel_InterruptCallback" value="Plat_Adc_DmaCallback"/>
                                  <setting name="dmaLogicChannel_ErrorInterruptCallback" value="NULL_PTR"/>
                                  <setting name="dmaLogicChannel_EcucPartitionRef" value=""/>
                                  <setting name="dmaLogicChannel_EnableGlobalConfig" value="false"/>
@@ -3440,7 +3440,7 @@
                                  <setting name="GptChannelTickValueMax" value="4294967295"/>
                                  <setting name="GptEnableWakeup" value="false"/>
                                  <array name="GptNotification">
-                                    <setting name="0" value="Gpt_Stm0_Noti"/>
+                                    <setting name="0" value="Plat_Timebase_Stm0Notification"/>
                                  </array>
                                  <array name="GptChannelEcucPartitionRef"/>
                                  <array name="GptWakeupConfiguration"/>

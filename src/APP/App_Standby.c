@@ -1,10 +1,14 @@
 #include "App_Standby.h"
+#include "../APP_CFG.h"
+
+#if (UART_ENABLE == CFG_ENABLE)
 #include "../platform/Uart_Port.h"
+#endif
+
 #include "S32K312_MC_ME.h"
 #include "S32K312_MC_RGM.h"
 #include "S32K312_WKPU.h"
 #include <stdio.h>
-#include "../APP_CFG.h"
 
 volatile App_Standby_StageType App_Standby_Stage;
 volatile App_Standby_BootInfoType App_Standby_BootInfo;
@@ -12,7 +16,10 @@ volatile App_Standby_BootInfoType App_Standby_BootInfo;
 #define APP_STANDBY_WKPU_MASK (1UL << 3U)
 
 #if (STANDBY_ENABLE == CFG_ENABLE)
-#include "../ADC/App_Adc.h"
+
+#if (ADC_ENABLE == CFG_ENABLE)
+#include "../platform/Adc_Port.h"
+#endif
 #include "Mcu.h"
 #include "Gpt.h"
 #include "Icu.h"
@@ -59,6 +66,7 @@ void App_Standby_CaptureBootInfo(void)
 #endif
 }
 
+#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
 void App_Standby_ReportBootInfo(void)
 {
     char text[160];
@@ -72,6 +80,7 @@ void App_Standby_ReportBootInfo(void)
         (unsigned long)App_Standby_BootInfo.wkpuWisr);
     (void)Plat_Uart_Send(text);
 }
+#endif
 
 void App_Standby_RtiNotification(void)
 {
@@ -88,20 +97,32 @@ void App_Standby_Enter(void)
         (WKPU_IP_USED != CFG_ON) || (WATCHDOG_ENABLE != CFG_DISABLE))
     {
         App_Standby_Stage = APP_STANDBY_DISABLED;
+
+#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
         (void)Plat_Uart_Send("Standby blocked: check RTD configuration / watchdog.");
-        return;
-    }
-    if (Plat_Uart_Send("Entering Standby; PIT0 RTI wake-up in about 3 seconds.") != E_OK)
-    {
+#endif
         return;
     }
 
+#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
+    if (Plat_Uart_Send("Entering Standby; PIT0 RTI wake-up in about 10 seconds.") != E_OK)
+    {
+        return;
+    }
+#endif
+
     App_Standby_Stage = APP_STANDBY_PREPARING;
+
+#if (TIMEBASE_ENABLE == CFG_ENABLE)
     Gpt_StopTimer(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
     Gpt_DisableNotification(GptConf_GptChannelConfiguration_GptChannelConfiguration_0);
+#endif
+
     Icu_DisableEdgeDetection(IcuChannel_0);
     Icu_DisableNotification(IcuChannel_0);
-    if (App_Adc_SetupResult == E_OK)
+
+#if (ADC_ENABLE == CFG_ENABLE)
+    if (Plat_Adc_SetupResult == E_OK)
     {
         Adc_DisableHardwareTrigger(AdcGroup_0);
         if (Adc_GetGroupStatus(AdcGroup_0) != ADC_IDLE)
@@ -109,21 +130,42 @@ void App_Standby_Enter(void)
             App_Standby_Halt(APP_STANDBY_QUIESCE_FAILED);
         }
     }
+#endif
+
     /* Stop PWM outputs before the eMIOS clocks change. Mcl stays initialized
      * because it owns the shared DMA/trigger resources. */
     Pwm_DeInit();
+    IntCtrl_Ip_DisableIrq(SIUL_1_IRQn);
+
+#if (UART_ENABLE == CFG_ENABLE)
     IntCtrl_Ip_DisableIrq(LPUART6_IRQn);
     if (Uart_Abort(0U, UART_RECEIVE) != E_OK)
     {
         App_Standby_Halt(APP_STANDBY_QUIESCE_FAILED);
     }
+#endif
+
+#if (TIMEBASE_ENABLE == CFG_ENABLE)
     IntCtrl_Ip_DisableIrq(STM0_IRQn);
-    IntCtrl_Ip_DisableIrq(SIUL_1_IRQn);
+#endif
+
+#if (DMA_ENABLE == CFG_ENABLE)
     IntCtrl_Ip_DisableIrq(DMATCD0_IRQn);
-    IntCtrl_Ip_ClearPending(STM0_IRQn);
+#endif
+
     IntCtrl_Ip_ClearPending(SIUL_1_IRQn);
+
+#if (TIMEBASE_ENABLE == CFG_ENABLE)
+    IntCtrl_Ip_ClearPending(STM0_IRQn);
+#endif
+
+#if (DMA_ENABLE == CFG_ENABLE)
     IntCtrl_Ip_ClearPending(DMATCD0_IRQn);
+#endif
+
+#if (UART_ENABLE == CFG_ENABLE)
     IntCtrl_Ip_ClearPending(LPUART6_IRQn);
+#endif
 
     /* Generated FIRC configuration switches consumers away from PLL before
      * disabling it. Do not call Mcu_DistributePllClock for this configuration. */
@@ -163,6 +205,8 @@ void App_Standby_Enter(void)
     App_Standby_Halt(APP_STANDBY_UNEXPECTED_RETURN);
 #else
     App_Standby_Stage = APP_STANDBY_DISABLED;
+#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
     (void)Plat_Uart_Send("Standby disabled: complete docs/standby-rti.md, then enable APP_STANDBY_ENABLE.");
+#endif
 #endif
 }

@@ -8,6 +8,9 @@
 #ifndef UART_PORT_H
 #define UART_PORT_H
 
+#include "../APP_CFG.h"
+
+#if (UART_ENABLE == CFG_ENABLE)
 #include "Std_Types.h"
 #include "Uart_Types.h"
 
@@ -29,5 +32,6 @@ void Plat_Uart_RxProcess(void);
 uint32 Plat_Uart_GetRxDropped(void);
 uint32 Plat_Uart_GetRxErrors(void);
 void Plat_Uart_Callback(const uint8 channel, const Uart_EventType event);
+#endif
 
 #endif

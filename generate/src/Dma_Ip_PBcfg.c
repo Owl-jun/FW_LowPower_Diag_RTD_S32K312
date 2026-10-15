@@ -179,7 +179,7 @@ static const Dma_Ip_LogicChannelConfigType LogicChannel0ConfigPB =
 				/* uint8 HwVersId; */                 DMA_IP_HARDWARE_VERSION_3,
 				/* uint8 HwInst; */                   DMA_IP_HW_INST_0,
 				/* uint8 HwChId; */                   DMA_IP_HW_CH_0,
-				/* Dma_Ip_Callback IntCallback; */    ISR_DMA_CALLBACK,
+				/* Dma_Ip_Callback IntCallback; */    Plat_Adc_DmaCallback,
 				/* Dma_Ip_Callback ErrIntCallback; */ NULL_PTR,
 		}, /* Dma_Ip_LogicChannelIdType */
 		NULL_PTR,

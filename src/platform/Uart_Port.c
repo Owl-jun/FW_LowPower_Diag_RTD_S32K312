@@ -7,6 +7,7 @@
 
 #include "Uart_Port.h"
 
+#if (UART_ENABLE == CFG_ENABLE)
 #include "CDD_Uart.h"
 #include "Lpuart_Uart_Ip.h"
 #include "IntCtrl_Ip.h"
@@ -105,3 +106,4 @@ Std_ReturnType Plat_Uart_Send(const char *text)
 
 	return Uart_SyncSend(0U, lineEnd, sizeof(lineEnd), 100000U);
 }
+#endif

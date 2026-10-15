@@ -114,7 +114,7 @@ extern "C"{
 *
 * @brief The callback functions defined by the user to be called as channel notifications
 */
-extern void Gpt_Stm0_Noti(void);
+extern void Plat_Timebase_Stm0Notification(void);
 extern void App_Standby_RtiNotification(void);
 /*==================================================================================================
 *                                       GLOBAL CONSTANTS
@@ -158,7 +158,7 @@ static const Gpt_ChannelConfigType Gpt_InitChannelPB[GPT_CONF_CHANNELS_PB] =
 {
     {   /*GptChannelConfiguration_0 configuration data*/
         (boolean)FALSE, /* Wakeup capability */
-        &Gpt_Stm0_Noti, /* Channel notification */
+        &Plat_Timebase_Stm0Notification, /* Channel notification */
 #if ((GPT_WAKEUP_FUNCTIONALITY_API == STD_ON) && (GPT_REPORT_WAKEUP_SOURCE == STD_ON))
         (EcuM_WakeupSourceType)0U, /* Wakeup information */
 #endif

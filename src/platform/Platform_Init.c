@@ -18,11 +18,11 @@
 #include "CDD_Uart.h"
 #include "CDD_Rm.h"
 #include "Siul2_Port_Ip.h"
-#include "../ADC/App_Adc.h"
+#include "Adc_Port.h"
 
 void Plat_InitHardware(void)
 {
-	Adc_ValueGroupType * ptrDmaBuf = App_Adc_Get_Dma_Result_Buf();
+	Adc_ValueGroupType * ptrDmaBuf = Plat_Adc_Get_Dma_Result_Buf();
 
 	/* MCU in RTD Module INIT */
 	Mcu_Init(NULL_PTR);
@@ -44,20 +44,19 @@ void Plat_InitHardware(void)
 	 * not execute below SW codes and wake-up by RTI request (wake-up after about 10-second)
 	 * */
 	Mcu_SetMode(1U);
-#else
-	/* DO NOTHING */
 #endif
 
-#if (BUILD_MODE == BM_RELEASE)
-	#if (WATCHDOG_ENABLE == CFG_ON)
-	/* WATCHDOG */
-		Wdg_43_Instance0_Init(NULL_PTR);
-	#endif
+
+#if (WATCHDOG_ENABLE == CFG_ENABLE)
+/* WATCHDOG */
+	Wdg_43_Instance0_Init(NULL_PTR);
 #endif
 
+#if (TIMEBASE_ENABLE == CFG_ENABLE)
 	/* STM0 in GPT Timer */
 	Gpt_Init(NULL_PTR);
 	Gpt_EnableNotification(0U);
+#endif
 
 	/* PORT */
 	Siul2_Port_Ip_Init(	NUM_OF_CONFIGURED_PINS_PortContainer_0_BOARD_InitPeripherals,
@@ -77,9 +76,12 @@ void Plat_InitHardware(void)
 	Icu_EnableNotification(IcuChannel_0);
 	Icu_EnableEdgeDetection(IcuChannel_0);
 
+#if (UART_ENABLE == CFG_ENABLE)
 	/* UART */
 	Uart_Init(NULL_PTR);
+#endif
 
+#if (ADC_ENABLE == CFG_ENABLE && DMA_ENABLE == CFG_ENABLE)
 	MCAL_DATA_SYNC_BARRIER();
 	/* Resource Manager */
 	Rm_Init(NULL_PTR);
@@ -88,14 +90,16 @@ void Plat_InitHardware(void)
 	/* ADC */
 	Adc_Init(NULL_PTR);
 	MCAL_DATA_SYNC_BARRIER();
-
 	ptrDmaBuf[0] = 0xFFFFU; /* Sentinel: no ADC result received yet. */
-	App_Adc_SetupResult = Adc_SetupResultBuffer(AdcGroup_0, ptrDmaBuf);
-	if (App_Adc_SetupResult == E_OK)
+	Plat_Adc_SetupResult = Adc_SetupResultBuffer(AdcGroup_0, ptrDmaBuf);
+	if (Plat_Adc_SetupResult == E_OK)
 	{
 		Adc_EnableHardwareTrigger(0U);
 	}
+#endif
 
+#if (TIMEBASE_ENABLE == CFG_ENABLE)
 	/* Clock Source : 48MHz, 4800000tick is 100ms */
 	Gpt_StartTimer(0U, 4800000U);
+#endif
 }
