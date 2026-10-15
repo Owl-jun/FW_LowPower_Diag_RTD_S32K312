@@ -232,6 +232,7 @@
 "./generate/src/Xrdc_Ip_PBcfg.o"
 "./src/APP/App.o"
 "./src/APP/App_Command.o"
+"./src/APP/App_Log.o"
 "./src/APP/App_Pwm.o"
 "./src/APP/App_Standby.o"
 "./src/APP/App_Telemetry.o"

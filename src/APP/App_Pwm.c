@@ -51,12 +51,13 @@ void App_Pwm_Process(void)
 				u8BtnCnt = (u8BtnCnt + 1U) % (11U);
 				Plat_Pwm_SetPairDuty(DUTY_CONVERT_LOGIC(u8BtnCnt));
 
+#if (UART_LOG_ENABLE == CFG_ENABLE  \
+	&& UART_ENABLE == CFG_ENABLE 	)
+
 				/* Percent in hundredths, rounded; no float printf support needed. */
 				uint32_t duty = (DUTY_CONVERT_LOGIC(u8BtnCnt) * 10000U
 						+ DUTY_CYCLE_100_PERCENT / 2U) / DUTY_CYCLE_100_PERCENT;
 
-#if (UART_LOG_ENABLE == CFG_ENABLE  \
-	&& UART_ENABLE == CFG_ENABLE 	)
 				snprintf(msg, sizeof(msg), "Cur Duty Cycle : %u.%02u%%",
 						(unsigned int)(duty / 100U), (unsigned int)(duty % 100U));
 				(void)Plat_Uart_Send(msg);

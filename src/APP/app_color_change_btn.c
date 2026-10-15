@@ -12,9 +12,7 @@
 #include "Dio.h"
 #include "Pwm.h"
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
-#include "../platform/Uart_Port.h"
-#endif
+#include "App_Log.h"
 
 typedef enum ColorType
 {
@@ -58,9 +56,7 @@ void ISR_BTN_Handler(void)
 		Dio_WriteChannel(DioConf_DioChannel_PTA31, STD_LOW);
 	}
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
-	(void)Plat_Uart_Send(msg);
-#endif
+	(void)App_Log_Write(msg);
 
 	eColType = (eColType + 1U) % COL_MAXCOUNT;
 

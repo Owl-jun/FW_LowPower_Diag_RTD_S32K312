@@ -1,4 +1,5 @@
 #include "App_Command.h"
+#include "App_Log.h"
 #include "../APP_CFG.h"
 
 #if (UART_ENABLE == CFG_ENABLE)
@@ -27,9 +28,7 @@ static void App_Command_Execute(uint8 command)
 {
     if (command == 0U)
     {
-#if (UART_ENABLE == CFG_ENABLE && UART_LOG_ENABLE == CFG_ENABLE)
-        (void)Plat_Uart_Send("Collect Command Key, Turn On Red LED");
-#endif
+        (void)App_Log_Write("Collect Command Key, Turn On Red LED");
 #if (PWM_ENABLE == CFG_ENABLE)
         App_Pwm_On_RedLed(CFG_ON);
 #endif

@@ -1,6 +1,6 @@
 #include "App_Standby.h"
 #include "../APP_CFG.h"
-#if (STANDBY_ENABLE == CFG_ENABLE)
+#include "App_Log.h"
 
 #if (UART_ENABLE == CFG_ENABLE)
 #include "../platform/Uart_Port.h"
@@ -17,6 +17,7 @@ volatile App_Standby_BootInfoType App_Standby_BootInfo;
 #define APP_STANDBY_WKPU_MASK (1UL << 3U)
 
 
+#if (STANDBY_ENABLE == CFG_ENABLE)
 #if (ADC_ENABLE == CFG_ENABLE)
 #include "../platform/Adc_Port.h"
 #endif
@@ -66,11 +67,10 @@ void App_Standby_CaptureBootInfo(void)
 #endif
 }
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
 void App_Standby_ReportBootInfo(void)
 {
-    char text[160];
-    (void)snprintf(text, sizeof(text),
+    if (!App_Log_IsEnabled()) { return; }
+    (void)App_Log_Printf(
         "Boot: standby=%u RTI-source=%u MODE=%08lx DES=%08lx FES=%08lx WISR=%08lx",
         (unsigned int)App_Standby_BootInfo.fromStandby,
         (unsigned int)((App_Standby_BootInfo.wkpuWisr & APP_STANDBY_WKPU_MASK) != 0U),
@@ -78,9 +78,9 @@ void App_Standby_ReportBootInfo(void)
         (unsigned long)App_Standby_BootInfo.resetDes,
         (unsigned long)App_Standby_BootInfo.resetFes,
         (unsigned long)App_Standby_BootInfo.wkpuWisr);
-    (void)Plat_Uart_Send(text);
+
 }
-#endif
+
 
 void App_Standby_RtiNotification(void)
 {
@@ -98,18 +98,16 @@ void App_Standby_Enter(void)
     {
         App_Standby_Stage = APP_STANDBY_DISABLED;
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
-        (void)Plat_Uart_Send("Standby blocked: check RTD configuration / watchdog.");
-#endif
+        (void)App_Log_Write("Standby blocked: check RTD configuration / watchdog.");
+
         return;
     }
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
-    if (Plat_Uart_Send("Entering Standby; PIT0 RTI wake-up in about 10 seconds.") != E_OK)
+    if (App_Log_Write("Entering Standby; PIT0 RTI wake-up in about 10 seconds.") != E_OK)
     {
         return;
     }
-#endif
+
 
     App_Standby_Stage = APP_STANDBY_PREPARING;
 
@@ -205,8 +203,7 @@ void App_Standby_Enter(void)
     App_Standby_Halt(APP_STANDBY_UNEXPECTED_RETURN);
 #else
     App_Standby_Stage = APP_STANDBY_DISABLED;
-#if (UART_LOG_ENABLE == CFG_ENABLE && UART_ENABLE == CFG_ENABLE)
-    (void)Plat_Uart_Send("Standby disabled: complete docs/standby-rti.md, then enable APP_STANDBY_ENABLE.");
-#endif
+    (void)App_Log_Write("Standby disabled: complete docs/standby-rti.md, then enable APP_STANDBY_ENABLE.");
+
 #endif
 }

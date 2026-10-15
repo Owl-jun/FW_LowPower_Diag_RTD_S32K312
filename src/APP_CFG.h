@@ -1,47 +1,43 @@
-/*
- * APP_CFG.h
- *
- *  Created on: 2026. 10. 15.
- *      Author: David.Kang
- */
-
+/* Application configuration. RTD hardware configuration remains in the .mex. */
 #ifndef APP_CFG_H_
 #define APP_CFG_H_
 
 #include "APP_TYPE.h"
 
-/* BUILD MODE SELECT
- * BM_DEVELOPE : DEBUG
- * BM_RELEASE : RELEASE */
-#define BUILD_MODE						(BM_DEVELOPE)
-
-/* USE MODULE SET FOR BUILD_MODE */
-#if (BUILD_MODE == BM_DEVELOPE)
-	#define INIT_BOOT_MODE					(BOOT_RUN)
-	#define WATCHDOG_ENABLE 				(CFG_DISABLE)
-	#define	UART_LOG_ENABLE					(CFG_ENABLE)
-	#define	UART_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use UART_LOG_ENABLE option */
-	#define TIMEBASE_ENABLE					(CFG_ENABLE)	/* It Must be CFG_ENABLE If use UART_LOG_ENABLE option */
-	#define STANDBY_ENABLE 					(CFG_ENABLE)
-	#define	ADC_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use DMA_ENABLE option */
-	#define _DEBUG_ADC_						(CFG_ON)
-	#define	DMA_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use ADC_ENABLE option */
-	#define	PWM_ENABLE						(CFG_ENABLE)
-#elif (BUILD_MODE == BM_RELEASE)
-	#define INIT_BOOT_MODE					(BOOT_RUN)
-	#define WATCHDOG_ENABLE 				(CFG_ENABLE)
-	#define	UART_LOG_ENABLE					(CFG_DISABLE)
-	#define	UART_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use UART_LOG_ENABLE option */
-	#define TIMEBASE_ENABLE					(CFG_ENABLE)	/* It Must be CFG_ENABLE If use UART_LOG_ENABLE option */
-	#define STANDBY_ENABLE 					(CFG_ENABLE)
-	#define	ADC_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use DMA_ENABLE option */
-	#define _DEBUG_ADC_						(CFG_OFF)
-	#define	DMA_ENABLE						(CFG_ENABLE)	/* It Must be CFG_ENABLE If use ADC_ENABLE option */
-	#define	PWM_ENABLE						(CFG_ENABLE)
-#else
+/* Select the default profile. May also be supplied by the build system. */
+#ifndef BUILD_MODE
+#define BUILD_MODE 				(BM_DEVELOPE)
 #endif
 
-/* TIMEOUT CFGs (SEC) */
-#define T_SEC_TIMEOUT_INF_LOOP 			(5U)	/* 5 Seconds */
+/* Only settings that differ between profiles belong here. */
+#if (BUILD_MODE == BM_DEVELOPE)
+#define WATCHDOG_ENABLE 		(CFG_DISABLE)
+#define UART_LOG_ENABLE 		(CFG_ENABLE)
+#define _DEBUG_ADC_ 			(CFG_ON)
+#elif (BUILD_MODE == BM_RELEASE)
+#define WATCHDOG_ENABLE 		(CFG_ENABLE)
+#define UART_LOG_ENABLE 		(CFG_DISABLE)
+#define _DEBUG_ADC_ 			(CFG_OFF)
+#else
+#error "Unsupported BUILD_MODE: select BM_DEVELOPE or BM_RELEASE"
+#endif
+
+/* Shared settings: edit each option in one place. */
+#define INIT_BOOT_MODE 				(BOOT_RUN)
+#define UART_ENABLE 				(CFG_ENABLE)
+#define TIMEBASE_ENABLE 			(CFG_ENABLE)
+#define ADC_ENABLE 					(CFG_ENABLE)
+#define PWM_ENABLE 					(CFG_ENABLE)
+#define T_SEC_TIMEOUT_INF_LOOP 		(5U)	/* SEC */
+
+/* The current ADC acquisition implementation always uses DMA. */
+#define DMA_ENABLE 					(ADC_ENABLE)
+
+/* Current Standby implementation rejects entry while watchdog is enabled.
+ * Release therefore has Standby disabled explicitly instead of advertising
+ * a feature that would be rejected at runtime. */
+#define STANDBY_ENABLE 				(WATCHDOG_ENABLE == CFG_DISABLE)
+
+#include "App_ConfigCheck.h"
 
 #endif /* APP_CFG_H_ */

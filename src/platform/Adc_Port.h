@@ -23,7 +23,7 @@ Adc_ValueGroupType Plat_Adc_ReadRaw(void);
 void Plat_Adc_DmaCallback(void);
 
 /* Live debugger watch values; completion count is updated last by the ISR. */
-#ifdef _DEBUG_ADC_
+#if (_DEBUG_ADC_ == CFG_ON)
 extern volatile uint32 Plat_Adc_DmaCompleteCount;
 extern volatile Adc_ValueGroupType Plat_Adc_LastResult;
 extern volatile Adc_StatusType Plat_Adc_LastStatus;

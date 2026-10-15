@@ -21,9 +21,7 @@ void App_Init(void)
     App_Standby_CaptureBootInfo();
 #endif
     Plat_InitHardware();
-#if (STANDBY_ENABLE == CFG_ENABLE &&	\
-	 UART_LOG_ENABLE == CFG_ENABLE && 	\
-	 UART_ENABLE == CFG_ENABLE)
+#if (STANDBY_ENABLE == CFG_ENABLE)
     App_Standby_ReportBootInfo();
 #endif
     if (Plat_Uart_Recv_Async() != E_OK)
@@ -54,9 +52,7 @@ void App_Process(void)
     Plat_Uart_RxProcess();
     App_Command_Process();
 
-#if (UART_LOG_ENABLE == CFG_ENABLE && TIMEBASE_ENABLE == CFG_ENABLE)
 	App_Telemetry_Process();
-#endif
 
 #endif
 
