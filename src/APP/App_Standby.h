@@ -3,8 +3,7 @@
 
 #include "Std_Types.h"
 
-/* Set to STD_ON only after completing docs/standby-rti.md and regenerating RTD. */
-#define APP_STANDBY_ENABLE (STD_ON)
+
 
 #define APP_STANDBY_RTI_CLOCK_HZ 48000U
 #define APP_STANDBY_DELAY_SECONDS 10U

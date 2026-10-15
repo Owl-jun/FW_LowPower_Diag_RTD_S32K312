@@ -6,6 +6,7 @@
  */
 
 #include "init.h"
+#include "../APP_CFG.h"
 #include "Platform.h"
 #include "Mcu.h"
 #include "Mcl.h"
@@ -17,21 +18,13 @@
 #include "CDD_Uart.h"
 #include "CDD_Rm.h"
 #include "Siul2_Port_Ip.h"
-
 #include "../ADC/App_Adc.h"
-
-//#define _DEBUG_CLOCK_
-#ifdef _DEBUG_CLOCK_
-#include "Clock_Ip.h"
-#include "Clock_Ip_Types.h"
-#include "Clock_Ip_Cfg.h"
-#endif
 
 void ALL_COMPONENT_INIT(void)
 {
 	Adc_ValueGroupType * ptrDmaBuf = App_Adc_Get_Dma_Result_Buf();
 
-	/* MCU */
+	/* MCU in RTD Module INIT */
 	Mcu_Init(NULL_PTR);
 	uint8_t u8Ret = Mcu_InitClock(0);
 	if (u8Ret != E_OK) { for (;;) { /* CLOCK Configure Failed */ } }
@@ -42,17 +35,24 @@ void ALL_COMPONENT_INIT(void)
 	/* Switch PLL-fed clock muxes to their configured sources. */
 	if (E_OK != Mcu_DistributePllClock()) { for (;;) { /* PLL distribution failed */ } }
 
-	/* MCU Set Mode 0 */
-	Mcu_SetMode(0);
-
-#ifdef _DEBUG_CLOCK_
-	volatile uint64 u64CurCoreClkHz = Clock_Ip_GetClockFrequency(CORE_CLK);
-	volatile uint64 u64CurEmios1ClkHz = Clock_Ip_GetClockFrequency(EMIOS1_CLK);
+#if (INIT_BOOT_MODE == BOOT_RUN)
+	/* MCU Set Mode 0 (RUN) */
+	Mcu_SetMode(0U);
+#elif (INIT_BOOT_MODE == BOOT_STANDBY)
+	/* MCU Set Mode 1 (STANDBY)
+	 * If selected boot mode 1, CPU State is to wait for interrupt(WFI),
+	 * not execute below SW codes and wake-up by RTI request (wake-up after about 10-second)
+	 * */
+	Mcu_SetMode(1U);
+#else
+	/* DO NOTHING */
 #endif
 
-#if WATCHDOG_ENABLE
+#if (BUILD_MODE == BM_RELEASE)
+	#if (WATCHDOG_ENABLE == CFG_ON)
 	/* WATCHDOG */
-	Wdg_43_Instance0_Init(NULL_PTR);
+		Wdg_43_Instance0_Init(NULL_PTR);
+	#endif
 #endif
 
 	/* STM0 in GPT Timer */

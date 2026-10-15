@@ -4,13 +4,14 @@
 #include "S32K312_MC_RGM.h"
 #include "S32K312_WKPU.h"
 #include <stdio.h>
+#include "../APP_CFG.h"
 
 volatile App_Standby_StageType App_Standby_Stage;
 volatile App_Standby_BootInfoType App_Standby_BootInfo;
 
 #define APP_STANDBY_WKPU_MASK (1UL << 3U)
 
-#if (APP_STANDBY_ENABLE == STD_ON)
+#if (STANDBY_ENABLE == CFG_ENABLE)
 #include "../INIT/init.h"
 #include "../ADC/App_Adc.h"
 #include "Mcu.h"
@@ -50,7 +51,7 @@ void App_Standby_CaptureBootInfo(void)
         ((App_Standby_BootInfo.modeStat & MC_ME_MODE_STAT_PREV_MODE_MASK) ==
          MC_ME_MODE_STAT_PREV_MODE_MASK) ? TRUE : FALSE;
 
-#if (APP_STANDBY_ENABLE == STD_ON)
+#if (STANDBY_ENABLE == CFG_ENABLE)
     /* WKPU belongs to the standby domain: acknowledge only our source,
      * after saving it. GPT initialization subsequently stops/reinitializes RTI. */
     IP_WKPU->WRER &= ~APP_STANDBY_WKPU_MASK;
@@ -81,11 +82,11 @@ void App_Standby_RtiNotification(void)
 
 void App_Standby_Enter(void)
 {
-#if (APP_STANDBY_ENABLE == STD_ON)
+#if (STANDBY_ENABLE == CFG_ENABLE)
     uint32 rtiControl;
 
-    if ((PIT_IP_USED != STD_ON) || (PIT_IP_RTI_USED != STD_ON) ||
-        (WKPU_IP_USED != STD_ON) || (WATCHDOG_ENABLE != STD_DISABLE))
+    if ((PIT_IP_USED != CFG_ON) || (PIT_IP_RTI_USED != CFG_ON) ||
+        (WKPU_IP_USED != CFG_ON) || (WATCHDOG_ENABLE != CFG_DISABLE))
     {
         App_Standby_Stage = APP_STANDBY_DISABLED;
         (void)App_Uart_Send("Standby blocked: check RTD configuration / watchdog.");
