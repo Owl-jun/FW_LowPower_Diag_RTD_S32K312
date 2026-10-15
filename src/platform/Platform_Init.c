@@ -14,7 +14,7 @@
 #include "Icu.h"
 #include "Gpt.h"
 #include "Adc.h"
-#include "Wdg_43_Instance0.h"
+#include "Wdg_Port.h"
 #include "CDD_Uart.h"
 #include "CDD_Rm.h"
 #include "Siul2_Port_Ip.h"
@@ -49,10 +49,8 @@ void Plat_InitHardware(void)
 #endif
 
 
-#if (WATCHDOG_ENABLE == CFG_ENABLE)
 /* WATCHDOG */
-	Wdg_43_Instance0_Init(NULL_PTR);
-#endif
+	Plat_Wdg_Init();
 
 #if (TIMEBASE_ENABLE == CFG_ENABLE)
 	/* STM0 in GPT Timer */

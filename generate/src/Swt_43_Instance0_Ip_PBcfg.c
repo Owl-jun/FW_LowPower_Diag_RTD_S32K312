@@ -108,7 +108,7 @@ extern "C"{
 /**
 *   @brief External Notifications for Wdg Interrupt
 */
-extern void Wdg_Callback(void);
+extern void Plat_Wdg_Callback(void);
 
 const Swt_Ip_ConfigType Swt_Ip_OffModeSettings_0=
 {
@@ -145,7 +145,7 @@ const Swt_Ip_ConfigType Swt_Ip_SlowModeSettings_0=
     (uint32)          0x0,        /* u32WindowValue */
     (uint16)          0x0000,        /* u16InitialKey */
     (Swt_Ip_LockType) SWT_IP_UNLOCK, /* lockConfig */
-    (Swt_CallbackPtrType) &Wdg_Callback         /* pfSwtCallback */
+    (Swt_CallbackPtrType) &Plat_Wdg_Callback         /* pfSwtCallback */
 };
 
 const Swt_Ip_ConfigType Swt_Ip_FastModeSettings_0=
@@ -164,7 +164,7 @@ const Swt_Ip_ConfigType Swt_Ip_FastModeSettings_0=
     (uint32)          0x0,        /* u32WindowValue */
     (uint16)          0x0000,        /* u16InitialKey */
     (Swt_Ip_LockType) SWT_IP_UNLOCK, /* lockConfig */
-    (Swt_CallbackPtrType) &Wdg_Callback         /* pfSwtCallback */
+    (Swt_CallbackPtrType) &Plat_Wdg_Callback         /* pfSwtCallback */
 };
 
 

@@ -3328,7 +3328,7 @@
                            <setting name="WdgInitialTimeout" value="0"/>
                            <setting name="WdgMaxTimeout" value="12"/>
                            <setting name="WdgRunArea" value="RAM"/>
-                           <setting name="WdgCallbackNotification" value="Wdg_Callback"/>
+                           <setting name="WdgCallbackNotification" value="Plat_Wdg_Callback"/>
                            <setting name="WdgVersionInfoApi" value="true"/>
                         </struct>
                         <array name="WdgClockReferencePoint">

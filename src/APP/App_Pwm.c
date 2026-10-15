@@ -11,10 +11,7 @@
 #include "../platform/Button_Port.h"
 #include "../platform/Pwm_Port.h"
 
-#if (UART_LOG_ENABLE == CFG_ENABLE  \
-	&& UART_ENABLE == CFG_ENABLE 	)
-#include "../platform/Uart_Port.h"
-#endif
+#include "App_Log.h"
 
 #define DEBOUNCE_CNT 					(10000U)
 #define DUTY_CYCLE_100_PERCENT            (PLAT_PWM_DUTY_FULL_SCALE)
@@ -28,10 +25,6 @@ void App_Pwm_On_RedLed(uint8_t cmd)
 
 void App_Pwm_Process(void)
 {
-#if (UART_LOG_ENABLE == CFG_ENABLE  \
-	&& UART_ENABLE == CFG_ENABLE 	)
-	static char msg[32];
-#endif
 	static uint8_t u8BtnCnt = 0U;
 	static uint32_t u32Debounce = 0U;
 	static uint8_t u8Stop = 0U;
@@ -51,17 +44,15 @@ void App_Pwm_Process(void)
 				u8BtnCnt = (u8BtnCnt + 1U) % (11U);
 				Plat_Pwm_SetPairDuty(DUTY_CONVERT_LOGIC(u8BtnCnt));
 
-#if (UART_LOG_ENABLE == CFG_ENABLE  \
-	&& UART_ENABLE == CFG_ENABLE 	)
-
+				if (App_Log_IsEnabled())
+				{
 				/* Percent in hundredths, rounded; no float printf support needed. */
 				uint32_t duty = (DUTY_CONVERT_LOGIC(u8BtnCnt) * 10000U
 						+ DUTY_CYCLE_100_PERCENT / 2U) / DUTY_CYCLE_100_PERCENT;
 
-				snprintf(msg, sizeof(msg), "Cur Duty Cycle : %u.%02u%%",
+				(void)App_Log_Printf("Cur Duty Cycle : %u.%02u%%",
 						(unsigned int)(duty / 100U), (unsigned int)(duty % 100U));
-				(void)Plat_Uart_Send(msg);
-#endif
+				}
 
 				u8Stop = 1U;
 			}

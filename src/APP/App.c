@@ -1,12 +1,13 @@
 #include "App.h"
 #include "App_Command.h"
+#include "app_color_change_btn.h"
 #include "App_Standby.h"
 #include "../platform/Platform_Init.h"
 #include "App_Pwm.h"
 #include "../platform/Uart_Port.h"
 #include "../platform/Timebase.h"
 #include "App_Telemetry.h"
-#include "../WDG/App_Wdg.h"
+#include "../platform/Wdg_Port.h"
 
 void App_Init(void)
 {
@@ -60,8 +61,7 @@ void App_Process(void)
     App_Pwm_Process();
 #endif
 
-#if (WATCHDOG_ENABLE == CFG_ON)
-		App_Wdg_Refresh();
-#endif
+    Plat_Wdg_Refresh();
+    App_ColorButton_Process();
 
 }
