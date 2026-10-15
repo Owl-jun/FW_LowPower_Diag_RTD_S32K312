@@ -264,6 +264,99 @@
                </clock_settings>
                <called_from_default_init>true</called_from_default_init>
             </clock_configuration>
+            <clock_configuration name="StandbyClock" id_prefix="" prefix_user_defined="false">
+               <description></description>
+               <options/>
+               <dependencies>
+                  <dependency resourceType="SWComponent" resourceId="platform.driver.clock" description="Clocks initialization requires the CLOCK Driver in the project." problem_level="2" source="Clocks:StandbyClock">
+                     <feature name="enabled" evaluation="equal" configuration="M7_0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+               </dependencies>
+               <clock_sources/>
+               <clock_outputs>
+                  <clock_output id="ADC0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ADC1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="AIPS_PLAT_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="AIPS_SLOW_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="BCTU0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CLKOUT_STANDBY_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CMP0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CMP1_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CORE_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CRC0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="DCM0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="DCM_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="DMAMUX0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="DMAMUX1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD10_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD11_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD2_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD3_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD4_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD5_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD6_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD7_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD8_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EDMA0_TCD9_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EIM0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EMIOS0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="EMIOS1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ERM0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FIRCOUT.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN2_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN3_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN4_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN5_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCANA_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCANB_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXIO0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="HSE_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="INTM_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LCU0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LCU1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPI2C0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPI2C1_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPSPI0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPSPI1_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPSPI2_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPSPI3_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART1_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART2_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART3_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART4_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART5_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART6_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPUART7_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="MSCM_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="PIT0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SCS_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SIRCOUT.outFreq" value="32 kHz" locked="false" accuracy=""/>
+                  <clock_output id="SIUL2_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="STCU0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="STM0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="STMA_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SWT0_CLK.outFreq" value="32 kHz" locked="false" accuracy=""/>
+                  <clock_output id="TEMPSENSE_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="TRACE_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="TRGMUX0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="TSENSE0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="WKPU0_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+               </clock_outputs>
+               <clock_settings>
+                  <setting id="CLK_GATE_PIT1_CLK" value="Disabled" locked="false"/>
+                  <setting id="FircStandbyConfig" value="Enabled" locked="false"/>
+                  <setting id="SircStandbyConfig" value="Enabled" locked="false"/>
+               </clock_settings>
+               <called_from_default_init>false</called_from_default_init>
+            </clock_configuration>
          </clock_configurations>
       </clocks>
       <ddr name="DDR" version="1.0" enabled="false" update_project_code="true">
@@ -437,16 +530,6 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
-            <dependency resourceType="SWComponent" resourceId="platform.driver.wkpu" description="Wkpu is not found in the toolchain/IDE project. The project will not compile!" problem_level="2" source="Peripherals">
-               <feature name="enabled" evaluation="equal">
-                  <data type="Boolean">true</data>
-               </feature>
-            </dependency>
-            <dependency resourceType="SWComponent" resourceId="platform.driver.wkpu" description="An unsupported version of the Wkpu in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}. The project might not compile correctly." problem_level="1" source="Peripherals">
-               <feature name="version" evaluation="equivalent">
-                  <data type="Version">1.0.0</data>
-               </feature>
-            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="generate/include/Adc_Cfg.h" update_enabled="true"/>
@@ -609,7 +692,6 @@
             <file path="generate/include/Wkpu_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Wkpu_Ip_Defines.h" update_enabled="true"/>
             <file path="generate/include/Wkpu_Ip_PBcfg.h" update_enabled="true"/>
-            <file path="generate/include/Wkpu_Ip_SA_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/Xbic_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Xbic_Ip_Cfg_Defines.h" update_enabled="true"/>
             <file path="generate/include/Xbic_Ip_PBcfg.h" update_enabled="true"/>
@@ -686,7 +768,6 @@
             <file path="generate/src/Wdg_43_Instance0_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Wdg_CfgExt.c" update_enabled="true"/>
             <file path="generate/src/Wkpu_Ip_PBcfg.c" update_enabled="true"/>
-            <file path="generate/src/Wkpu_Ip_SA_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Xbic_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Xrdc_Ip_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Xrdc_Ip_PBcfg.c" update_enabled="true"/>
@@ -935,7 +1016,7 @@
                         </struct>
                         <struct name="IcuConfigSet">
                            <setting name="Name" value="IcuConfigSet"/>
-                           <setting name="IcuMaxChannel" value="1"/>
+                           <setting name="IcuMaxChannel" value="2"/>
                            <array name="IcuChannel">
                               <struct name="0">
                                  <setting name="Name" value="IcuChannel_0"/>
@@ -960,6 +1041,27 @@
                                  <array name="IcuTimestampMeasurement"/>
                                  <array name="IcuWakeup"/>
                               </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="IcuChannel_1"/>
+                                 <setting name="IcuChannelId" value="1"/>
+                                 <array name="IcuChannelEcucPartitionRef"/>
+                                 <setting name="IcuChannelRef" value="/Icu/Icu/IcuConfigSet/StandbyRtiWake/IcuWkpuChannels_0"/>
+                                 <setting name="IcuDMAChannelEnable" value="false"/>
+                                 <array name="IcuDMAChannelRef"/>
+                                 <setting name="IcuDefaultStartEdge" value="ICU_RISING_EDGE"/>
+                                 <setting name="IcuMeasurementMode" value="ICU_MODE_SIGNAL_EDGE_DETECT"/>
+                                 <setting name="IcuOverflowNotification" value="NULL_PTR"/>
+                                 <setting name="IcuWakeupCapability" value="false"/>
+                                 <array name="IcuSignalEdgeDetection">
+                                    <struct name="0">
+                                       <setting name="Name" value="IcuSignalEdgeDetection"/>
+                                       <array name="IcuSignalNotification"/>
+                                    </struct>
+                                 </array>
+                                 <array name="IcuSignalMeasurement"/>
+                                 <array name="IcuTimestampMeasurement"/>
+                                 <array name="IcuWakeup"/>
+                              </struct>
                            </array>
                            <array name="IcueMios"/>
                            <array name="IcuSiul2">
@@ -978,12 +1080,29 @@
                                  </array>
                               </struct>
                            </array>
-                           <array name="IcuWkpu"/>
+                           <array name="IcuWkpu">
+                              <struct name="0">
+                                 <setting name="Name" value="StandbyRtiWake"/>
+                                 <setting name="IcuWkpuInstance" value="0"/>
+                                 <array name="IcuWkpuChannels">
+                                    <struct name="0">
+                                       <setting name="Name" value="IcuWkpuChannels_0"/>
+                                       <setting name="IcuWkpuChannel" value="3"/>
+                                       <setting name="Icu_EXT_ISR_WIFERDigitalFilter" value="false"/>
+                                    </struct>
+                                 </array>
+                                 <array name="IcuWkpuNMIConfiguration"/>
+                              </struct>
+                           </array>
                            <array name="IcuLpCmp"/>
                            <array name="IcuHwInterruptConfigList">
                               <struct name="0">
                                  <setting name="Name" value="IcuHwInterruptConfigList_0"/>
                                  <setting name="IcuIsrHwId" value="SIUL2_0_IRQ_CH_13"/>
+                              </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="IcuHwInterruptConfigList_1"/>
+                                 <setting name="IcuIsrHwId" value="WKPU_CH_3"/>
                               </struct>
                            </array>
                         </struct>
@@ -1063,7 +1182,7 @@
                            <array name="McuCmuNotification"/>
                            <setting name="McuAlternateResetIsrUsed" value="false"/>
                            <setting name="McuCmuErrorIsrUsed" value="true"/>
-                           <setting name="McuVoltageErrorIsrUsed" value="false"/>
+                           <setting name="McuVoltageErrorIsrUsed" value="true"/>
                            <array name="McuErrorIsrNotification"/>
                            <setting name="McuDisableRgmInit" value="false"/>
                            <setting name="McuDisablePmcInit" value="false"/>
@@ -1408,6 +1527,164 @@
                                     <struct name="3">
                                        <setting name="Name" value="McuClockReferencePoint_GPT"/>
                                        <setting name="McuClockFrequencySelect" value="STM0_CLK"/>
+                                    </struct>
+                                 </array>
+                              </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="StandbyClock"/>
+                                 <setting name="Configuration" value="StandbyClock"/>
+                                 <array name="McuClockEcucPartitionRef"/>
+                                 <struct name="McuFIRC">
+                                    <setting name="Name" value="McuFIRC"/>
+                                    <setting name="McuFircUnderMcuControl" value="true"/>
+                                    <setting name="McuFircDivSel" value="Div_by_1"/>
+                                    <setting name="McuFircStandbyEnable" value="true"/>
+                                 </struct>
+                                 <struct name="McuSIRC">
+                                    <setting name="Name" value="McuSIRC"/>
+                                    <setting name="McuSircUnderMcuControl" value="true"/>
+                                    <setting name="McuSircStandbyEnable" value="true"/>
+                                 </struct>
+                                 <struct name="McuFXOSC">
+                                    <setting name="Name" value="McuFXOSC"/>
+                                    <setting name="McuFxoscUnderMcuControl" value="true"/>
+                                    <setting name="McuFxoscPowerDownCtr" value="false"/>
+                                    <setting name="McuFxoscBypass" value="false"/>
+                                    <setting name="McuFxoscMainComparator" value="true"/>
+                                    <setting name="McuFxoscALCEnable" value="Enabled"/>
+                                 </struct>
+                                 <struct name="McuSXOSC">
+                                    <setting name="Name" value="McuSXOSC"/>
+                                    <setting name="McuSxoscUnderMcuControl" value="true"/>
+                                    <setting name="McuSxoscPowerDownCtr" value="false"/>
+                                 </struct>
+                                 <struct name="McuCgm0SettingConfig">
+                                    <setting name="Name" value="McuCgm0SettingConfig"/>
+                                    <array name="McuCgm0PcfsConfig">
+                                       <struct name="0">
+                                          <setting name="Name" value="McuCgm0PcfsConfig_0"/>
+                                          <setting name="McuClockPcfsUnderMcuControl" value="false"/>
+                                          <setting name="McuPCFS_Name" value="PCFS_8"/>
+                                       </struct>
+                                    </array>
+                                    <struct name="McuCgm0ClockMux0">
+                                       <setting name="Name" value="McuCgm0ClockMux0"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux0_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux0Div0_En" value="true"/>
+                                       <setting name="McuClkMux0Div0Trigger" value="IMMEDIATE_DIVIDER_UPDATE"/>
+                                       <setting name="McuClkMux0Div1_En" value="true"/>
+                                       <setting name="McuClkMux0Div1Trigger" value="IMMEDIATE_DIVIDER_UPDATE"/>
+                                       <setting name="McuClkMux0Div2_En" value="true"/>
+                                       <setting name="McuClkMux0Div2Trigger" value="IMMEDIATE_DIVIDER_UPDATE"/>
+                                       <setting name="McuClkMux0Div3_En" value="true"/>
+                                       <setting name="McuClkMux0Div3Trigger" value="IMMEDIATE_DIVIDER_UPDATE"/>
+                                       <setting name="McuClkMux0Div4_En" value="true"/>
+                                       <setting name="McuClkMux0Div4Trigger" value="IMMEDIATE_DIVIDER_UPDATE"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux1" quick_selection="Default">
+                                       <setting name="Name" value="McuCgm0ClockMux1"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux1_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux1Div0_En" value="true"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux3" quick_selection="Default">
+                                       <setting name="Name" value="McuCgm0ClockMux3"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux3_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux3Div0_En" value="true"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux4" quick_selection="Default">
+                                       <setting name="Name" value="McuCgm0ClockMux4"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux4_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux4Div0_En" value="true"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux5" quick_selection="Default">
+                                       <setting name="Name" value="McuCgm0ClockMux5"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux5_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux5Div0_En" value="true"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux6">
+                                       <setting name="Name" value="McuCgm0ClockMux6"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux6_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux6Div0_En" value="false"/>
+                                    </struct>
+                                    <struct name="McuCgm0ClockMux11" quick_selection="Default">
+                                       <setting name="Name" value="McuCgm0ClockMux11"/>
+                                       <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                       <setting name="McuClkMux11_Source" value="FIRC_CLK"/>
+                                       <setting name="McuClkMux11Div0_En" value="true"/>
+                                    </struct>
+                                 </struct>
+                                 <struct name="McuRtcClockSelect" quick_selection="Default">
+                                    <setting name="Name" value="McuRtcClockSelect"/>
+                                    <setting name="McuClockMuxUnderMcuControl" value="true"/>
+                                    <setting name="McuRtc_Source" value="SXOSC_CLK"/>
+                                 </struct>
+                                 <struct name="McuPll_0">
+                                    <setting name="Name" value="McuPll_0"/>
+                                    <setting name="McuPLLUnderMcuControl" value="true"/>
+                                    <setting name="McuPLLEnabled" value="false"/>
+                                    <setting name="McuPllClockSelection" value="FXOSC_CLK"/>
+                                    <struct name="McuPll_Configuration">
+                                       <setting name="Name" value="McuPll_Configuration"/>
+                                       <setting name="McuPllFmSscgbyp" value="true"/>
+                                       <setting name="McuPllFmSpreadctl" value="Down_Spread"/>
+                                       <setting name="McuPllFdSdmen" value="false"/>
+                                       <setting name="McuPllFdSdm2" value="false"/>
+                                       <setting name="McuPllFdSdm3" value="false"/>
+                                       <setting name="McuPllOdiv0_En" value="false"/>
+                                       <setting name="McuPllOdiv1_En" value="false"/>
+                                    </struct>
+                                    <struct name="McuPll_Parameter" quick_selection="Default">
+                                       <setting name="Name" value="McuPll_Parameter"/>
+                                    </struct>
+                                 </struct>
+                                 <array name="McuClkMonitor">
+                                    <struct name="0">
+                                       <setting name="Name" value="McuClkMonitor_0"/>
+                                       <setting name="McuClockMonitorUnderMcuControl" value="true"/>
+                                       <setting name="McuCmuName" value="CMU_FC_0_FXOSC_CLK"/>
+                                       <setting name="McuClkMonitorEn" value="false"/>
+                                       <setting name="McuFHHAsyncEventEn" value="false"/>
+                                       <setting name="McuFLLAsyncEventEn" value="false"/>
+                                       <setting name="McuFHHInterruptEn" value="false"/>
+                                       <setting name="McuFLLInterruptEn" value="false"/>
+                                       <setting name="McuClockMonitorDeviation" value="Maximum_5_percentage_deviation"/>
+                                       <setting name="McuClockMonitorLatency" value="Lowest_Latency"/>
+                                    </struct>
+                                    <struct name="1">
+                                       <setting name="Name" value="McuClkMonitor_1"/>
+                                       <setting name="McuClockMonitorUnderMcuControl" value="true"/>
+                                       <setting name="McuCmuName" value="CMU_FC_3_CORE_CLK"/>
+                                       <setting name="McuClkMonitorEn" value="false"/>
+                                       <setting name="McuFHHAsyncEventEn" value="false"/>
+                                       <setting name="McuFLLAsyncEventEn" value="false"/>
+                                       <setting name="McuFHHInterruptEn" value="false"/>
+                                       <setting name="McuFLLInterruptEn" value="false"/>
+                                       <setting name="McuClockMonitorDeviation" value="Maximum_5_percentage_deviation"/>
+                                       <setting name="McuClockMonitorLatency" value="Lowest_Latency"/>
+                                    </struct>
+                                    <struct name="2">
+                                       <setting name="Name" value="McuClkMonitor_2"/>
+                                       <setting name="McuClockMonitorUnderMcuControl" value="true"/>
+                                       <setting name="McuCmuName" value="CMU_FC_4_AIPS_PLAT_CLK"/>
+                                       <setting name="McuClkMonitorEn" value="false"/>
+                                       <setting name="McuFHHAsyncEventEn" value="false"/>
+                                       <setting name="McuFLLAsyncEventEn" value="false"/>
+                                       <setting name="McuFHHInterruptEn" value="false"/>
+                                       <setting name="McuFLLInterruptEn" value="false"/>
+                                       <setting name="McuClockMonitorDeviation" value="Maximum_5_percentage_deviation"/>
+                                       <setting name="McuClockMonitorLatency" value="Lowest_Latency"/>
+                                    </struct>
+                                 </array>
+                                 <array name="McuClockReferencePoint">
+                                    <struct name="0">
+                                       <setting name="Name" value="McuClockReferencePoint_0"/>
+                                       <setting name="McuClockFrequencySelect" value="CORE_CLK"/>
                                     </struct>
                                  </array>
                               </struct>
@@ -1863,7 +2140,7 @@
                                  <setting name="McuPowerMode" value="STANDBY"/>
                                  <setting name="McuMainCoreSelect" value="CM7_0"/>
                                  <setting name="McuCoreLockStepEnable" value="false"/>
-                                 <setting name="McuEnableSleepOnExit" value="true"/>
+                                 <setting name="McuEnableSleepOnExit" value="false"/>
                                  <array name="McuPowerEcucPartitionRef"/>
                                  <struct name="McuPartitionConfiguration">
                                     <setting name="Name" value="McuPartitionConfiguration"/>
@@ -2331,7 +2608,7 @@
                               <setting name="Name" value="McuPowerControl"/>
                               <struct name="McuPMC_Config">
                                  <setting name="Name" value="McuPMC_Config"/>
-                                 <setting name="McuLVDIEEnable" value="false"/>
+                                 <setting name="McuLVDIEEnable" value="true"/>
                                  <setting name="McuHVDIEEnable" value="false"/>
                                  <setting name="McuLPM25ENEnable" value="false"/>
                                  <setting name="McuFASTRECEnable" value="false"/>
@@ -2420,6 +2697,13 @@
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="9"/>
                                     <setting name="IsrHandler" value="Dma0_Ch0_IRQHandler"/>
+                                 </struct>
+                                 <struct name="5">
+                                    <setting name="Name" value="PlatformIsrConfig_5"/>
+                                    <setting name="IsrName" value="PMC_IRQn"/>
+                                    <setting name="IsrEnabled" value="true"/>
+                                    <setting name="IsrPriority" value="0"/>
+                                    <setting name="IsrHandler" value="Power_Ip_PMC_VoltageErrorIsr"/>
                                  </struct>
                               </array>
                               <array name="PlatformNvicEcucPartitionRef"/>
@@ -2536,7 +2820,7 @@
                                     <setting name="0" value="PWM_VARIABLE_PERIOD"/>
                                  </array>
                                  <setting name="PwmPeriodInTicks" value="true"/>
-                                 <setting name="PwmPeriodDefault" value="0"/>
+                                 <setting name="PwmPeriodDefault" value="24000"/>
                                  <setting name="PwmDutycycleDefault" value="0"/>
                                  <setting name="PwmPolarity" value="PWM_LOW"/>
                                  <setting name="PwmIdleState" value="PWM_HIGH"/>
@@ -2554,7 +2838,7 @@
                                     <setting name="0" value="PWM_VARIABLE_PERIOD"/>
                                  </array>
                                  <setting name="PwmPeriodInTicks" value="true"/>
-                                 <setting name="PwmPeriodDefault" value="0"/>
+                                 <setting name="PwmPeriodDefault" value="24000"/>
                                  <setting name="PwmDutycycleDefault" value="0"/>
                                  <setting name="PwmPolarity" value="PWM_HIGH"/>
                                  <setting name="PwmIdleState" value="PWM_LOW"/>
@@ -3161,8 +3445,36 @@
                                  <array name="GptChannelEcucPartitionRef"/>
                                  <array name="GptWakeupConfiguration"/>
                               </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="StandbyRti"/>
+                                 <setting name="GptChannelId" value="1"/>
+                                 <setting name="GptHwIp" value="PIT"/>
+                                 <setting name="GptModuleRef" value="/Gpt/Gpt/GptChannelConfigSet/Pit_0/PitChannel_0"/>
+                                 <setting name="GptChannelMode" value="GPT_CH_MODE_CONTINUOUS"/>
+                                 <setting name="GptChannelClkSrcRef" value="/Gpt/Gpt/GptDriverConfiguration/GptClockReferencePoint_1"/>
+                                 <setting name="GptChannelTickValueMax" value="4294967295"/>
+                                 <setting name="GptEnableWakeup" value="true"/>
+                                 <array name="GptNotification">
+                                    <setting name="0" value="App_Standby_RtiNotification"/>
+                                 </array>
+                                 <array name="GptChannelEcucPartitionRef"/>
+                                 <array name="GptWakeupConfiguration"/>
+                              </struct>
                            </array>
-                           <array name="GptPit"/>
+                           <array name="GptPit">
+                              <struct name="0">
+                                 <setting name="Name" value="Pit_0"/>
+                                 <setting name="GptPitModule" value="PIT_0"/>
+                                 <setting name="PitFreezeEnable" value="false"/>
+                                 <array name="GptPitChannels">
+                                    <struct name="0">
+                                       <setting name="Name" value="PitChannel_0"/>
+                                       <setting name="GptPitChannel" value="CH_RTI"/>
+                                       <setting name="ChainMode" value="false"/>
+                                    </struct>
+                                 </array>
+                              </struct>
+                           </array>
                            <array name="GptStm">
                               <struct name="0">
                                  <setting name="Name" value="Stm0"/>
@@ -3210,8 +3522,8 @@
                            <struct name="4">
                               <setting name="Name" value="GptHwConfiguration_4"/>
                               <setting name="GptIsrHwId" value="PIT_0_CH_RTI"/>
-                              <setting name="GptIsrEnable" value="false"/>
-                              <setting name="GptChannelIsUsed" value="false"/>
+                              <setting name="GptIsrEnable" value="true"/>
+                              <setting name="GptChannelIsUsed" value="true"/>
                            </struct>
                            <struct name="5">
                               <setting name="Name" value="GptHwConfiguration_5"/>
@@ -3410,6 +3722,10 @@
                               <struct name="0">
                                  <setting name="Name" value="GptClockReferencePoint_0"/>
                                  <setting name="GptClockReference" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/McuClockReferencePoint_GPT"/>
+                              </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="GptClockReferencePoint_1"/>
+                                 <setting name="GptClockReference" value="/Mcu/Mcu/McuModuleConfiguration/StandbyClock/McuClockReferencePoint_0"/>
                               </struct>
                            </array>
                         </struct>
@@ -6858,62 +7174,6 @@
                            <setting name="SwPatchVersion" value="1"/>
                            <array name="VendorApiInfix"/>
                            <setting name="VendorId" value="43"/>
-                        </struct>
-                     </config_set>
-                  </instance>
-                  <instance name="Wkpu" uuid="c4a469df-009d-40fc-bd37-d041e57db538" type="Wkpu" type_id="Wkpu" mode="ip" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
-                     <config_set name="Wkpu">
-                        <setting name="Name" value="Wkpu"/>
-                        <struct name="ConfigTimeSupport">
-                           <setting name="POST_BUILD_VARIANT_USED" value="false"/>
-                           <setting name="IMPLEMENTATION_CONFIG_VARIANT" value="VARIANT-POST-BUILD"/>
-                        </struct>
-                        <struct name="IcuConfigSet">
-                           <setting name="Name" value="WkpuConfigSet"/>
-                           <setting name="IcuMaxChannel" value="1"/>
-                           <array name="IcuChannel">
-                              <struct name="0">
-                                 <setting name="Name" value="IcuChannel_0"/>
-                                 <setting name="IcuChannelId" value="0"/>
-                                 <setting name="IcuChannelRef" value="/Wkpu/Wkpu/WkpuConfigSet/IcuWkpu_0/IcuWkpuNMIConfiguration_0"/>
-                                 <setting name="IcuDefaultStartEdge" value="ICU_RISING_EDGE"/>
-                                 <setting name="IcuMeasurementMode" value="ICU_MODE_SIGNAL_EDGE_DETECT"/>
-                                 <setting name="IcuOverflowNotification" value="NULL_PTR"/>
-                                 <array name="IcuSignalEdgeDetection">
-                                    <struct name="0">
-                                       <setting name="Name" value="IcuSignalEdgeDetection"/>
-                                       <array name="IcuSignalNotification">
-                                          <setting name="0" value="NULL_PTR"/>
-                                       </array>
-                                    </struct>
-                                 </array>
-                                 <array name="IcuSignalMeasurement"/>
-                                 <array name="IcuTimestampMeasurement"/>
-                              </struct>
-                           </array>
-                           <array name="IcuWkpu">
-                              <struct name="0">
-                                 <setting name="Name" value="IcuWkpu_0"/>
-                                 <setting name="IcuWkpuInstance" value="0"/>
-                                 <array name="IcuWkpuChannels"/>
-                                 <array name="IcuWkpuNMIConfiguration">
-                                    <struct name="0">
-                                       <setting name="Name" value="IcuWkpuNMIConfiguration_0"/>
-                                       <setting name="NMICoreSource" value="0"/>
-                                       <setting name="DestinationSourceSelect" value="NMI_NON_MASK_INT"/>
-                                       <setting name="WakeupRequestEnable" value="false"/>
-                                       <setting name="FilterEnable" value="false"/>
-                                       <setting name="NMIEdgeEvents" value="RISING_EDGE"/>
-                                       <setting name="LockRegister" value="false"/>
-                                    </struct>
-                                 </array>
-                              </struct>
-                           </array>
-                           <array name="IcuHwInterruptConfigList"/>
-                        </struct>
-                        <struct name="IcuGeneral">
-                           <setting name="Name" value="WkupGeneral"/>
-                           <setting name="IcuDevErrorDetect" value="false"/>
                         </struct>
                      </config_set>
                   </instance>

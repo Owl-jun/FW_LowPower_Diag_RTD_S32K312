@@ -95,7 +95,7 @@
 									<listOptionValue builtIn="false" value="CPU_CORTEX_M7"/>
 								</option>
 							</tool>
-							<tool id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker.465284480" name="Standard S32DS C Linker" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker">
+							<tool command="${cross_prefix}${cross_c}${cross_suffix}" id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker.465284480" name="Standard S32DS C Linker" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker">
 								<option id="com.freescale.s32ds.cross.gnu.tool.c.linker.option.gcsections.51661236" name="Remove unused sections (-Xlinker --gc-sections)" superClass="com.freescale.s32ds.cross.gnu.tool.c.linker.option.gcsections" value="false" valueType="boolean"/>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.libraries.1698286726" name="Libraries support" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.libraries" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.libraries.newlib_nano_noio" valueType="enumerated"/>
 								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.mcpu.661353920" name="Arm family" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.mcpu" value="com.nxp.s32ds.cle.arm.mbs.arm32.bare.tool.c.linker.option.target.mcpu.cortex-m7" valueType="enumerated"/>
@@ -115,6 +115,8 @@
 									<listOptionValue builtIn="false" value="m"/>
 									<listOptionValue builtIn="false" value="gcc"/>
 								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="gnu.c.link.option.other.1754484060" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList"/>
+								<option id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker.option.useprintffloat.1472777936" name="Support print float format for newlib_nano library (-u _printf_float)" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.c.linker.option.useprintffloat" value="true" valueType="boolean"/>
 								<inputType id="com.freescale.s32ds.cross.gnu.tool.c.linker.inputType.scriptfile.1074645100" superClass="com.freescale.s32ds.cross.gnu.tool.c.linker.inputType.scriptfile"/>
 							</tool>
 							<tool id="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.cpp.linker.1487236848" name="Standard S32DS C++ Linker" superClass="com.nxp.s32ds.cle.arm.mbs.arm32.bare.gnu.9.2.tool.cpp.linker">
@@ -734,7 +736,20 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.embsys" parent_project="true" register_architecture="" register_board="---  none ---" register_chip="" register_core="" register_vendor=""/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release_FLASH">
+			<resource resourceType="PROJECT" workspacePath="/configure_s32k312minievb"/>
+		</configuration>
+		<configuration configurationName="Release_RAM">
+			<resource resourceType="PROJECT" workspacePath="/configure_s32k312minievb"/>
+		</configuration>
+		<configuration configurationName="Debug_FLASH">
+			<resource resourceType="PROJECT" workspacePath="/configure_s32k312minievb"/>
+		</configuration>
+		<configuration configurationName="Debug_RAM">
+			<resource resourceType="PROJECT" workspacePath="/configure_s32k312minievb"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.internal.core.toolchainSettings">
 		<COND_TOOLCHAIN_LIBRARIES/>
@@ -744,9 +759,9 @@
 		<COND_TOOLCHAIN_CUSTOM_OPTION/>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.internal.core.toolchainScriptProfile">
-		<COND_TOOLCHAIN_COMPONENTS_OPTION/>
+		<COND_TOOLCHAIN_COMPONENTS_OPTION>COPY=platform.driver.icu;platform.driver.Platform;platform.driver.clock;platform.driver.adc;platform.driver.osif;platform.driver.mcu;platform.driver.pwm;platform.driver.dio;platform.driver.gpt;platform.driver.uart;platform.driver.mcl;platform.driver.siul2_port;platform.driver.wdg;platform.driver.Rm</COND_TOOLCHAIN_COMPONENTS_OPTION>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.core">
-		<sdkComponents>platform.driver.osif;platform.driver.det;platform.driver.rte_osif;platform.driver.siul2_port;platform.driver.rte_port;platform.driver.icu;platform.driver.rte_icu;platform.driver.mcu;platform.driver.rte_mcu;platform.driver.Platform;platform.driver.rte_platform;platform.driver.dio;platform.driver.rte_dio;platform.driver.pwm;platform.driver.rte_pwm;platform.driver.mcl;platform.driver.rte_mcl;platform.driver.pins;platform.driver.clock;platform.driver.uart;platform.driver.rte_uart;platform.driver.wdg;platform.driver.rte_wdg;platform.driver.wdgif;platform.driver.gpt;platform.driver.rte_gpt;platform.driver.adc;platform.driver.rte_adc;platform.driver.Rm;platform.driver.rte_rm;platform.driver.wkpu</sdkComponents>
+		<sdkComponents>platform.driver.osif;platform.driver.rte_osif;platform.driver.rte_port;platform.driver.pins;platform.driver.icu;platform.driver.rte_icu;platform.driver.det;platform.driver.Platform;platform.driver.rte_platform;platform.driver.clock;platform.driver.rte_mcu;platform.driver.adc;platform.driver.rte_adc;platform.driver.mcu;platform.driver.pwm;platform.driver.rte_pwm;platform.driver.mcl;platform.driver.rte_mcl;platform.driver.dio;platform.driver.rte_dio;platform.driver.gpt;platform.driver.rte_gpt;platform.driver.uart;platform.driver.rte_uart;platform.driver.siul2_port;platform.driver.wdg;platform.driver.rte_wdg;platform.driver.wdgif;platform.driver.Rm;platform.driver.rte_rm</sdkComponents>
 	</storageModule>
 </cproject>

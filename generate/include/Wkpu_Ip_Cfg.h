@@ -92,7 +92,11 @@ extern "C"{
 #if (STD_ON == WKPU_IP_USED)
 #define WKPU_IP_DEV_ERROR_DETECT          (STD_OFF)
 
-#define WKPU_ICU_SINGLE_INTERRUPT         (STD_OFF)
+#define WKPU_ICU_SINGLE_INTERRUPT         (STD_ON)
+
+/* Macro used to export generated configuration. */
+#define WKPU_CONFIG_EXT \
+        WKPU_CONFIG_PB
 
 #endif /* WKPU_IP_USED */
 

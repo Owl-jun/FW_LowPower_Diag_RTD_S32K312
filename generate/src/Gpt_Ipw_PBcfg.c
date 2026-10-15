@@ -178,7 +178,7 @@ extern "C"{
 /** 
  * @brief   GPT instances related configuration array
  */
-const Gpt_Ipw_HwInstanceConfigType Gpt_Ipw_HwInstanceConfig_PB[1U] =
+const Gpt_Ipw_HwInstanceConfigType Gpt_Ipw_HwInstanceConfig_PB[2U] =
 {
     {
         /** @brief IP type  */
@@ -191,13 +191,25 @@ const Gpt_Ipw_HwInstanceConfigType Gpt_Ipw_HwInstanceConfig_PB[1U] =
             &STM_0_InitConfig_PB
         }
     }
+,
+    {
+        /** @brief IP type  */
+        GPT_PIT_MODULE,
+        /** @brief IP instance */
+        0U,
+        /** @brief IP instance pointer */
+        {
+            &PIT_0_InitConfig_PB,
+            NULL_PTR
+        }
+    }
 
 };
 
 /** 
  * @brief   Gpt channels IP related configuration array
  */
-const Gpt_Ipw_HwChannelConfigType Gpt_Ipw_ChannelConfig_PB[1U] =
+const Gpt_Ipw_HwChannelConfigType Gpt_Ipw_ChannelConfig_PB[2U] =
 {
 
     /** @brief GptChannelConfiguration_0 */
@@ -212,6 +224,22 @@ const Gpt_Ipw_HwChannelConfigType Gpt_Ipw_ChannelConfig_PB[1U] =
         {
             NULL_PTR,
             &STM_0_ChannelConfig_PB[0U],
+            NULL_PTR,
+            NULL_PTR
+        }
+    }
+    /** @brief StandbyRti */,
+    {
+        /** @brief IP type  */
+        GPT_PIT_MODULE,
+        /** @brief IP instance */
+        0U,
+        /** @brief IP channel */
+        RTI,
+        /** @brief IP channel pointer */
+        {
+            &PIT_0_ChannelConfig_PB[0U],
+            NULL_PTR,
             NULL_PTR,
             NULL_PTR
         }

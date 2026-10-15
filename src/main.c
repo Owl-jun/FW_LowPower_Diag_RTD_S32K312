@@ -12,13 +12,16 @@
 #include "Uart/App_Uart.h"
 #include "WDG/App_Wdg.h"
 #include "GPT/App_Gpt.h"
+#include "APP/App_Standby.h"
 
 
 /* MAIN */
 int main(void)
 {
+	App_Standby_CaptureBootInfo();
 	/* All Use Peripherals Initialize */
 	ALL_COMPONENT_INIT();
+	App_Standby_ReportBootInfo();
 
 	/* UART RX Start for receive User Command */
 	if (App_Uart_Recv_Async() != E_OK)

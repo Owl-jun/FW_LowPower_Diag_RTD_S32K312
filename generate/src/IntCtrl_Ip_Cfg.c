@@ -73,10 +73,11 @@ static const IntCtrl_Ip_IrqConfigType aIrqConfiguration[] = {
     {SWT0_IRQn, (boolean)TRUE, 1U, &Swt_Ip_Swt0_Isr},
     {STM0_IRQn, (boolean)TRUE, 10U, &STM_0_ISR},
     {DMATCD0_IRQn, (boolean)TRUE, 9U, &Dma0_Ch0_IRQHandler},
+    {PMC_IRQn, (boolean)TRUE, 0U, &Power_Ip_PMC_VoltageErrorIsr},
 };
 /* Configuration structure for interrupt controller */
 const IntCtrl_Ip_CtrlConfigType intCtrlConfig = {
-    5U,
+    6U,
     aIrqConfiguration
 };
 #define PLATFORM_STOP_SEC_CONFIG_DATA_UNSPECIFIED

@@ -4,6 +4,7 @@
 -T
 "C:/workspaceNXP/configure_s32k312minievb/Project_Settings/Linker_Files/linker_flash_s32k312.ld"
 -Wl,-Map,"configure_s32k312minievb.map"
+-u _printf_float
 -mcpu=cortex-m7
 -mthumb
 -mlittle-endian
@@ -230,6 +231,7 @@
 "./generate/src/Xrdc_Ip_Cfg.o"
 "./generate/src/Xrdc_Ip_PBcfg.o"
 "./src/ADC/App_Adc.o"
+"./src/APP/App_Standby.o"
 "./src/APP/app_color_change_btn.o"
 "./src/GPT/App_Gpt.o"
 "./src/INIT/init.o"

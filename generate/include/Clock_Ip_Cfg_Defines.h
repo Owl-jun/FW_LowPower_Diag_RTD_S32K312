@@ -325,6 +325,8 @@ extern "C"{
 #define CLOCK_IP_MULTIPARTITION_SUPPORT                (STD_OFF)
 #define CLOCK_IP_PARTITION_0                   0U
 
+#define CLOCK_IP_PARTITION_1                   0U
+
 
 /*==================================================================================================
                                              ENUMS

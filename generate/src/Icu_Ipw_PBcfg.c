@@ -191,7 +191,7 @@ extern "C"{
 /** 
  * @brief   Icu channels IP related configuration array
  */
-const Icu_Ipw_ChannelConfigType Icu_Ipw_IpChannelConfig_PB[1U] =
+const Icu_Ipw_ChannelConfigType Icu_Ipw_IpChannelConfig_PB[2U] =
 {
 
     /** @brief IcuChannel_0 */
@@ -218,14 +218,61 @@ const Icu_Ipw_ChannelConfigType Icu_Ipw_IpChannelConfig_PB[1U] =
     #endif  /* CMP_IP_USED */
         /** @brief Index in the configuration table of the channels */
         (uint8)0U
+    },
+    /** @brief IcuChannel_1 */
+    {
+        /** @brief IP type of this channel */
+        ICU_WKPU_MODULE,
+        /** @brief Instance number */
+        (uint8)0U,
+    #if (STD_ON == EMIOS_ICU_IP_USED)
+        /** @brief Emios IP channel pointer */
+        NULL_PTR,
+    #endif  /* EMIOS_ICU_IP_USED */
+    #if (STD_ON == WKPU_IP_USED)
+        /** @brief Wkpu IP channel pointer */
+        &Wkpu_Ip_ChannelConfig_PB[0U],
+    #endif  /* WKPU_IP_USED */
+    #if (STD_ON == SIUL2_ICU_IP_USED)
+        /** @brief Siul2 IP channel pointer */
+        NULL_PTR,
+    #endif  /* SIUL2_ICU_IP_USED */
+    #if (STD_ON == CMP_IP_USED)
+        /** @brief Cmp IP channel pointer */
+        NULL_PTR,
+    #endif  /* CMP_IP_USED */
+        /** @brief Index in the configuration table of the channels */
+        (uint8)0U
     }
 };
 
 /**
  * @brief   Icu instances related configuration array
  */
-const Icu_Ipw_IpConfigType Icu_Ipw_IpConfig_PB[1U] =
+const Icu_Ipw_IpConfigType Icu_Ipw_IpConfig_PB[2U] =
 {
+    {
+        /** @brief IP type */
+        ICU_WKPU_MODULE,
+    #if (STD_ON == EMIOS_ICU_IP_USED)
+        /** @brief pointer to Emios HW configuration of instance */
+        NULL_PTR,
+    #endif  /* EMIOS_ICU_IP_USED */
+    #if (STD_ON == WKPU_IP_USED)
+        /** @brief pointer to Wkpu HW configuration of instance */
+        &Wkpu_Ip_Config_PB,
+    #endif  /* WKPU_IP_USED */
+    #if (STD_ON == SIUL2_ICU_IP_USED)
+        /** @brief pointer to Siul2 HW configuration of instance */
+        NULL_PTR,
+    #endif  /* SIUL2_ICU_IP_USED */
+    #if (STD_ON == CMP_IP_USED)
+        /** @brief pointer to LpCmp HW configuration of instance */
+        NULL_PTR,
+    #endif  /* CMP_IP_USED */
+        /** @brief IP instance number */
+        (uint8)0U
+    },
     {
         /** @brief IP type */
         ICU_SIUL2_MODULE,

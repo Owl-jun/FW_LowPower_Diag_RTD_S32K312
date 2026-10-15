@@ -8,16 +8,20 @@
 #include "App_Uart.h"
 
 #include "../PWM/App_Pwm.h"
+#include "../APP/App_Standby.h"
 
+#include "Mcu.h"
 #include "CDD_Uart.h"
 #include "Lpuart_Uart_Ip.h"
 #include "IntCtrl_Ip.h"
 #include <stdlib.h>
 #include "string.h"
 
-#define RX_BUFFER_SIZE 256U
-#define RX_PACKET_SIZE 8U
-#define RX_PACKET_CNT  2U
+#define RX_BUFFER_SIZE 	256U
+#define RX_PACKET_SIZE 	8U
+#define RX_PACKET_CNT  	2U
+#define UART_LIMIT_LEN	4096U
+
 typedef struct UART_PACKET
 {
 	char u8RxPacket[RX_PACKET_SIZE];
@@ -82,13 +86,12 @@ void App_Uart_RxProcess(void)
 	{
 		if (rxPacketNum == 0U)
 		{
-			App_Uart_Send("Collect Command Key, Turn On Red Led");
+			App_Uart_Send("Collect Command Key, Turn On Red LED");
 			App_Pwm_On_RedLed(rxPacketNum);
 		}
 		else if (rxPacketNum == 1U)
 		{
-			App_Uart_Send("Collect Command Key, Turn Off Red Led");
-			App_Pwm_On_RedLed(rxPacketNum);
+			App_Standby_Enter();
 		}
 		Reset_Packet(&rxPacket);
 		rxPacketNum = 0xFFU;
@@ -158,6 +161,7 @@ Std_ReturnType App_Uart_Send(const char *text)
 	while (text[length] != '\0')
 	{
 		length++;
+		if (UART_LIMIT_LEN < length) { break; }
 	}
 
 	/* Do not modify the caller's string; literals may reside in flash. */

@@ -185,7 +185,7 @@ extern "C"{
 /**
 * @brief            ISR Mcu_PMC_UnderOverVoltage_ISR is/is not available (STD_ON/STD_OFF)
 */
-#define POWER_IP_VOLTAGE_ERROR_ISR_USED                  (STD_OFF)
+#define POWER_IP_VOLTAGE_ERROR_ISR_USED                  (STD_ON)
 
 /**
 * @brief           This define controls the availability of function Power_Ip_DCM_GPR_PMICBypasses

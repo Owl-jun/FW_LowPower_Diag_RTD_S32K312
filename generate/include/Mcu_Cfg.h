@@ -387,7 +387,7 @@ extern "C"{
 /**
 * @brief            Maximum number of MCU Clock configurations.
 */
-#define MCU_MAX_CLKCONFIGS   ((uint32)1U)
+#define MCU_MAX_CLKCONFIGS   ((uint32)2U)
 
 /**
 * @brief            Maximum number of MCU Mode configurations.
@@ -554,6 +554,11 @@ extern "C"{
 #define McuClockSettingConfig_0      ((Mcu_ClockType)0U)
 
 #define McuConf_McuClockSettingConfig_McuClockSettingConfig_0      ((Mcu_ClockType)0U)
+
+
+#define StandbyClock      ((Mcu_ClockType)1U)
+
+#define McuConf_McuClockSettingConfig_StandbyClock      ((Mcu_ClockType)1U)
 
 #endif
 

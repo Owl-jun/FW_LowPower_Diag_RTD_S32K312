@@ -80,6 +80,7 @@ extern void LPUART_UART_IP_6_IRQHandler(void);
 extern void Swt_Ip_Swt0_Isr(void);
 extern void STM_0_ISR(void);
 extern void Dma0_Ch0_IRQHandler(void);
+extern void Power_Ip_PMC_VoltageErrorIsr(void);
 #define PLATFORM_STOP_SEC_CONFIG_DATA_UNSPECIFIED
 #include "Platform_MemMap.h"
 

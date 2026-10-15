@@ -75,14 +75,14 @@ extern "C"{
                                        DEFINES AND MACROS
 ==================================================================================================*/
 
-#define WKPU_IP_USED               (STD_OFF)
+#define WKPU_IP_USED               (STD_ON)
 
 #if (STD_ON == WKPU_IP_USED)
 #define WKPU_IP_NMI_API            (STD_OFF)
 #define WKPU_IP_NUM_OF_CHANNELS               (64U)
 
 /** @brief The number of Wkpu channels are used in configuration */
-#define WKPU_IP_NUM_OF_CHANNELS_USED          ((uint8)0U)
+#define WKPU_IP_NUM_OF_CHANNELS_USED          ((uint8)1U)
 
 #define WKPU_IP_NUM_OF_CHANNELS_IN_ONE_REG_32 (32U)
 
@@ -94,6 +94,9 @@ extern "C"{
 #define WKPU_IP_STANDBY_WAKEUP_SUPPORT        (STD_OFF)
 /** @brief Define if global variables need to be placed in non-cache area or not */
 #define WKPU_IP_NO_CACHE_USED                 (STD_OFF)
+
+#define WKPU_IP_INITIAL_INDEX_OF_CHANNELS \
+    {255U, 255U, 255U, 0U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U, 255U}
 
 #endif /* WKPU_IP_USED */
 

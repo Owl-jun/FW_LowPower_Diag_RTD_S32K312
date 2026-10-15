@@ -132,7 +132,7 @@ const Emios_Pwm_Ip_ChannelConfigType Emios_Pwm_Ip_I1_Ch12 =
             /* .CbFunction */       NULL_PTR,
             /* .CbParameter */      0U
                                 },
-    /* .PeriodCount */          0U,
+    /* .PeriodCount */          24000U,
     /* .DutyCycle */            0U,
     /* .PhaseShift */           0U,
     /* .DeadTime */             0U,
@@ -156,7 +156,7 @@ const Emios_Pwm_Ip_ChannelConfigType Emios_Pwm_Ip_I1_Ch4 =
             /* .CbFunction */       NULL_PTR,
             /* .CbParameter */      0U
                                 },
-    /* .PeriodCount */          0U,
+    /* .PeriodCount */          24000U,
     /* .DutyCycle */            0U,
     /* .PhaseShift */           0U,
     /* .DeadTime */             0U,

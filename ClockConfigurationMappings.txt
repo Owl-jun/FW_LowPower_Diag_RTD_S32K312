@@ -1,2 +1,2 @@
-1,,
-,PC,ClockConfig0
+2,,
+,PC,ClockConfig0,StandbyClock

@@ -642,7 +642,7 @@ const Power_Ip_ModeConfigType Power_Ip_aModeConfigPB[2U] =
         POWER_IP_STANDBY_MODE,
 
         /* The Sleep On Exit configuration. */
-        (boolean)TRUE,
+        (boolean)FALSE,
         /* MC_ME IP Mode settings. */
         &Power_Ip_MC_ME_ModeConfigPB_1,
         /* Configuration for DCM_GPR (Device Configuration Module General-Purpose Registers) hardware IP. */
@@ -692,7 +692,7 @@ static const Power_Ip_PMC_ConfigType Power_Ip_PMC_ConfigPB =
 {
     /* PMC Configuration Register (CONFIG). */
     (
-    ((uint32)0x00000000U) 
+    ((uint32)0x00000000U) | PMC_CONFIG_LVDIE_MASK
     )
 };
 

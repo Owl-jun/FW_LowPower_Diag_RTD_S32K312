@@ -125,6 +125,17 @@ extern "C"{
 #define CLOCK_IP_CONFIGURED_GATES_0_NO       (61U)
 #define CLOCK_IP_CONFIGURED_CMUS_0_NO       (3U)
 
+/**
+* @brief            Number of clock configurations 1
+*/
+#define CLOCK_IP_CONFIGURED_IRCOSCS_1_NO       (3U)
+#define CLOCK_IP_CONFIGURED_XOSCS_1_NO       (2U)
+#define CLOCK_IP_CONFIGURED_PLLS_1_NO       (1U)
+#define CLOCK_IP_CONFIGURED_SELECTORS_1_NO       (8U)
+#define CLOCK_IP_CONFIGURED_DIVIDERS_1_NO       (14U)
+#define CLOCK_IP_CONFIGURED_GATES_1_NO       (61U)
+#define CLOCK_IP_CONFIGURED_CMUS_1_NO       (3U)
+
 
 /*==================================================================================================
 *                                              ENUMS

@@ -149,7 +149,7 @@ const Mcu_ConfigType Mcu_PreCompileConfig=
 
 #if (MCU_INIT_CLOCK == STD_ON)
     /* Number of Clock Setting configurations. */
-    (Mcu_ClockType)1U,
+    (Mcu_ClockType)2U,
 #endif /* (MCU_INIT_CLOCK == STD_ON) */
 
 #ifndef MCU_MAX_NORAMCONFIGS
