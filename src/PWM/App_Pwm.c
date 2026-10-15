@@ -10,7 +10,7 @@
 #include "Dio.h"
 #include "Pwm.h"
 
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 
 #define DEBOUNCE_CNT 					(10000U)
 #define DUTY_CYCLE_100_PERCENT			(0x8000U)
@@ -52,7 +52,7 @@ void App_Pwm_Process(void)
 
 				snprintf(msg, sizeof(msg), "Cur Duty Cycle : %u.%02u%%",
 						(unsigned int)(duty / 100U), (unsigned int)(duty % 100U));
-				(void)App_Uart_Send(msg);
+				(void)Plat_Uart_Send(msg);
 
 				u8Stop = 1U;
 			}

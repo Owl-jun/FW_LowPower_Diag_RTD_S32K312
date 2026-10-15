@@ -3,7 +3,7 @@
 #include "App_Standby.h"
 #include "../platform/Platform_Init.h"
 #include "../PWM/App_Pwm.h"
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 #include "../GPT/App_Gpt.h"
 #include "../WDG/App_Wdg.h"
 
@@ -17,10 +17,10 @@ void App_Init(void)
 
     /* Preserve wakeup/reset evidence before drivers modify status flags. */
     App_Standby_CaptureBootInfo();
-    Platform_InitHardware();
+    Plat_InitHardware();
     App_Standby_ReportBootInfo();
 
-    if (App_Uart_Recv_Async() != E_OK)
+    if (Plat_Uart_Recv_Async() != E_OK)
     {
 #if (BUILD_MODE == BM_RELEASE)
     	u32BaseTS = App_Gpt_Get_Elapsed_Sec();
@@ -43,7 +43,7 @@ void App_Process(void)
 {
     /* Preserve the existing superloop order. ISR callbacks only provide
      * inputs; command execution remains in main context. */
-    App_Uart_RxProcess();
+    Plat_Uart_RxProcess();
     App_Command_Process();
     App_Pwm_Process();
     App_Gpt_Send_Time_Uart();

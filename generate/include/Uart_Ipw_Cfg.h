@@ -121,7 +121,7 @@ extern "C"{
 ==================================================================================================*/
 #define UART_START_SEC_CODE
 #include "Uart_MemMap.h"
-extern void App_Uart_Callback(uint8 HwInstance, Uart_EventType Event);
+extern void Plat_Uart_Callback(uint8 HwInstance, Uart_EventType Event);
 #define UART_STOP_SEC_CODE
 #include "Uart_MemMap.h"
 

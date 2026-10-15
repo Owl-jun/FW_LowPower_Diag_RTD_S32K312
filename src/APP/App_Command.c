@@ -1,7 +1,7 @@
 #include "App_Command.h"
 #include "../APP_CFG.h"
 #include "App_Standby.h"
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 #include "../PWM/App_Pwm.h"
 
 #define APP_COMMAND_NONE 0xFFU
@@ -18,7 +18,7 @@ static void App_Command_Execute(uint8 command)
 {
     if (command == 0U)
     {
-        (void)App_Uart_Send("Collect Command Key, Turn On Red LED");
+        (void)Plat_Uart_Send("Collect Command Key, Turn On Red LED");
         App_Pwm_On_RedLed(CFG_ON);
     }
     else if (command == 1U)
@@ -34,7 +34,7 @@ void App_Command_Process(void)
 
     for (consumed = 0U; consumed < APP_COMMAND_RX_BUDGET; consumed++)
     {
-        if (App_Uart_Read(&byte, 1U) == 0U) { break; }
+        if (Plat_Uart_Read(&byte, 1U) == 0U) { break; }
 
         if (App_Command_Id == APP_COMMAND_NONE)
         {

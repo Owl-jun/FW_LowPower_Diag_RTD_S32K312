@@ -1,5 +1,5 @@
 #include "App_Standby.h"
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 #include "S32K312_MC_ME.h"
 #include "S32K312_MC_RGM.h"
 #include "S32K312_WKPU.h"
@@ -70,7 +70,7 @@ void App_Standby_ReportBootInfo(void)
         (unsigned long)App_Standby_BootInfo.resetDes,
         (unsigned long)App_Standby_BootInfo.resetFes,
         (unsigned long)App_Standby_BootInfo.wkpuWisr);
-    (void)App_Uart_Send(text);
+    (void)Plat_Uart_Send(text);
 }
 
 void App_Standby_RtiNotification(void)
@@ -88,10 +88,10 @@ void App_Standby_Enter(void)
         (WKPU_IP_USED != CFG_ON) || (WATCHDOG_ENABLE != CFG_DISABLE))
     {
         App_Standby_Stage = APP_STANDBY_DISABLED;
-        (void)App_Uart_Send("Standby blocked: check RTD configuration / watchdog.");
+        (void)Plat_Uart_Send("Standby blocked: check RTD configuration / watchdog.");
         return;
     }
-    if (App_Uart_Send("Entering Standby; PIT0 RTI wake-up in about 3 seconds.") != E_OK)
+    if (Plat_Uart_Send("Entering Standby; PIT0 RTI wake-up in about 3 seconds.") != E_OK)
     {
         return;
     }
@@ -163,6 +163,6 @@ void App_Standby_Enter(void)
     App_Standby_Halt(APP_STANDBY_UNEXPECTED_RETURN);
 #else
     App_Standby_Stage = APP_STANDBY_DISABLED;
-    (void)App_Uart_Send("Standby disabled: complete docs/standby-rti.md, then enable APP_STANDBY_ENABLE.");
+    (void)Plat_Uart_Send("Standby disabled: complete docs/standby-rti.md, then enable APP_STANDBY_ENABLE.");
 #endif
 }

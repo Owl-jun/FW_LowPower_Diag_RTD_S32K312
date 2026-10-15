@@ -12,7 +12,7 @@
 #include "Dio.h"
 #include "Pwm.h"
 
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 
 typedef enum ColorType
 {
@@ -54,7 +54,7 @@ void ISR_BTN_Handler(void)
 		Dio_WriteChannel(DioConf_DioChannel_PTA31, STD_LOW);
 	}
 
-	(void)App_Uart_Send(msg);
+	(void)Plat_Uart_Send(msg);
 
 	eColType = (eColType + 1U) % COL_MAXCOUNT;
 

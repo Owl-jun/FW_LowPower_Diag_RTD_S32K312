@@ -8,7 +8,7 @@
 #include "App_Wdg.h"
 #include "../APP_CFG.h"
 #include "Wdg_43_Instance0.h"
-#include "../Uart/App_Uart.h"
+#include "../platform/Uart_Port.h"
 
 // #define DEBUG_WDG_TIMEOUT
 
@@ -19,7 +19,7 @@ void App_Wdg_Refresh(void)
 
 void Wdg_Callback(void)
 {
-	(void)App_Uart_Send("Watchdog Timeout Occured");
+	(void)Plat_Uart_Send("Watchdog Timeout Occured");
 #if (BUILD_MODE == BM_RELEASE)
 	#if (WATCHDOG_ENABLE == CFG_ENABLE)
 			Wdg_43_Instance0_Service();

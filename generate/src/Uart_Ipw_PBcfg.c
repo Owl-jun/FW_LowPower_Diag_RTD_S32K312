@@ -187,7 +187,7 @@ const Uart_Ipw_HwConfigType Uart_Ipw_xHwConfigPB_0 =
     /* Type of Hardware interface configured.*/
     LPUART_IP,
     /* User Callback */
-    (Uart_CallbackType)&App_Uart_Callback,
+    (Uart_CallbackType)&Plat_Uart_Callback,
     /* Pointer to the Ip configuration structure.*/
     &Uart_Ipw_IpChnConfigPB_0
 };

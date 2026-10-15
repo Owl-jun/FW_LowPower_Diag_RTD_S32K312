@@ -237,10 +237,10 @@
 "./src/APP/app_color_change_btn.o"
 "./src/GPT/App_Gpt.o"
 "./src/PWM/App_Pwm.o"
-"./src/Uart/App_Uart.o"
 "./src/WDG/App_Wdg.o"
 "./src/main.o"
 "./src/platform/Platform_Init.o"
+"./src/platform/Uart_Port.o"
 -lc
 -lm
 -lgcc

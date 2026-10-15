@@ -3246,7 +3246,7 @@
                            <array name="UartEcucPartitionRef"/>
                            <setting name="UartCallbackCapability" value="true"/>
                            <array name="UartCallback">
-                              <setting name="0" value="App_Uart_Callback"/>
+                              <setting name="0" value="Plat_Uart_Callback"/>
                            </array>
                         </struct>
                         <struct name="UartGlobalConfig">

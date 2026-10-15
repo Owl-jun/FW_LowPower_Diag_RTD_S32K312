@@ -34,7 +34,7 @@ typedef struct
 extern volatile App_Standby_StageType App_Standby_Stage;
 extern volatile App_Standby_BootInfoType App_Standby_BootInfo;
 
-/* Called first by App_Init(), before Platform_InitHardware(). */
+/* Called first by App_Init(), before Plat_InitHardware(). */
 void App_Standby_CaptureBootInfo(void);
 /* Call after normal peripheral initialization, before starting UART RX. */
 void App_Standby_ReportBootInfo(void);

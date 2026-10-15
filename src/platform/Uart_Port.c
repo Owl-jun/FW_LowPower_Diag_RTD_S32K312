@@ -1,11 +1,11 @@
 /*
- * App_Uart.c
+ * Uart_Port.c
  *
  *  Created on: 2026. 9. 21.
  *      Author: David.Kang
  */
 
-#include "App_Uart.h"
+#include "Uart_Port.h"
 
 #include "CDD_Uart.h"
 #include "Lpuart_Uart_Ip.h"
@@ -23,14 +23,14 @@ static volatile uint32 rxDropped;
 static volatile uint32 rxErrors;
 static boolean rxStarted;
 
-Std_ReturnType App_Uart_Recv_Async(void)
+Std_ReturnType Plat_Uart_Recv_Async(void)
 {
 	Std_ReturnType result = Uart_AsyncReceive(0U, &rxByte, 1U);
 	if (result == E_OK) { rxStarted = TRUE; }
 	return result;
 }
 
-uint32 App_Uart_Read(uint8 *data, uint32 capacity)
+uint32 Plat_Uart_Read(uint8 *data, uint32 capacity)
 {
 	uint32 count = 0U;
 	if (data == NULL_PTR) { return 0U; }
@@ -42,7 +42,7 @@ uint32 App_Uart_Read(uint8 *data, uint32 capacity)
 	return count;
 }
 
-void App_Uart_RxProcess(void)
+void Plat_Uart_RxProcess(void)
 {
 	uint32 remaining;
 	/* Main context only. Restart after RTD has stopped RX on an error. */
@@ -58,7 +58,7 @@ void App_Uart_RxProcess(void)
 
 }
 
-void App_Uart_Callback(const uint8 channel, const Uart_EventType event)
+void Plat_Uart_Callback(const uint8 channel, const Uart_EventType event)
 {
 	if (channel != 0U) { return; }
 	if (event == UART_EVENT_RX_FULL)
@@ -77,10 +77,10 @@ void App_Uart_Callback(const uint8 channel, const Uart_EventType event)
 	else if (event == UART_EVENT_ERROR) { rxErrors++; }
 }
 
-uint32 App_Uart_GetRxDropped(void) { return rxDropped; }
-uint32 App_Uart_GetRxErrors(void) { return rxErrors; }
+uint32 Plat_Uart_GetRxDropped(void) { return rxDropped; }
+uint32 Plat_Uart_GetRxErrors(void) { return rxErrors; }
 
-Std_ReturnType App_Uart_Send(const char *text)
+Std_ReturnType Plat_Uart_Send(const char *text)
 {
 	static const uint8 lineEnd[] = {'\r', '\n'};
 	uint32 length = 0U;

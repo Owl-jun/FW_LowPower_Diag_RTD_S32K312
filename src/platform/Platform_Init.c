@@ -20,7 +20,7 @@
 #include "Siul2_Port_Ip.h"
 #include "../ADC/App_Adc.h"
 
-void Platform_InitHardware(void)
+void Plat_InitHardware(void)
 {
 	Adc_ValueGroupType * ptrDmaBuf = App_Adc_Get_Dma_Result_Buf();
 

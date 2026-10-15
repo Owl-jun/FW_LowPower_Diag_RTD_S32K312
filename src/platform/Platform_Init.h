@@ -11,6 +11,6 @@
 /* Call once per boot, after capturing reset/wakeup status.
  * Configures RTD peripherals and starts the existing ADC/timebase services.
  * Distinct from NXP's Platform_Init(), which initializes the Platform driver. */
-void Platform_InitHardware(void);
+void Plat_InitHardware(void);
 
 #endif
