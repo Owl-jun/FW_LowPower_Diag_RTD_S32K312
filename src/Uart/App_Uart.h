@@ -22,7 +22,8 @@ Std_ReturnType App_Uart_Recv_Async(void);
  * Call regularly. Message boundaries (newline/length) belong to the caller. */
 uint32 App_Uart_Read(uint8 *data, uint32 capacity);
 
-/* Stable Receive & UART Command Execute Process */
+/* Main context only. Recover reception after a UART error.
+ * Command parsing belongs to App_Command_Process. */
 void App_Uart_RxProcess(void);
 
 uint32 App_Uart_GetRxDropped(void);

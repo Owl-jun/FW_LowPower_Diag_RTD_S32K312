@@ -231,6 +231,7 @@
 "./generate/src/Xrdc_Ip_Cfg.o"
 "./generate/src/Xrdc_Ip_PBcfg.o"
 "./src/ADC/App_Adc.o"
+"./src/APP/App_Command.o"
 "./src/APP/App_Standby.o"
 "./src/APP/app_color_change_btn.o"
 "./src/GPT/App_Gpt.o"

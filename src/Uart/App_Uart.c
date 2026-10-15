@@ -7,36 +7,14 @@
 
 #include "App_Uart.h"
 
-#include "../PWM/App_Pwm.h"
-#include "../APP/App_Standby.h"
-
-#include "Mcu.h"
 #include "CDD_Uart.h"
 #include "Lpuart_Uart_Ip.h"
 #include "IntCtrl_Ip.h"
-#include <stdlib.h>
-#include "string.h"
 
 #define RX_BUFFER_SIZE 	256U
-#define RX_PACKET_SIZE 	8U
-#define RX_PACKET_CNT  	2U
 #define UART_LIMIT_LEN	4096U
 
-typedef struct UART_PACKET
-{
-	char u8RxPacket[RX_PACKET_SIZE];
-	uint8_t u8RxPtr;
-}UART_PACKET_t;
-
-void Reset_Packet(UART_PACKET_t * pPacket)
-{
-	memset(pPacket->u8RxPacket, '\0', RX_PACKET_SIZE);
-	pPacket->u8RxPtr = 0U;
-}
-
 /* Single ISR producer, single main-loop consumer. Capacity: 255 bytes. */
-static UART_PACKET_t rxPacket = {{0xA5U,} , 0U};
-const char * u8Cmd[RX_PACKET_CNT] = {"950809" , "950808"};
 static uint8 rxByte;
 static volatile uint8 rxBuf[RX_BUFFER_SIZE];
 static volatile uint32 rxHead;
@@ -44,11 +22,6 @@ static volatile uint32 rxTail;
 static volatile uint32 rxDropped;
 static volatile uint32 rxErrors;
 static boolean rxStarted;
-
-static volatile uint8   rxPacketNum = 0xFFU;
-static volatile boolean rxPacketCompleted;
-
-
 
 Std_ReturnType App_Uart_Recv_Async(void)
 {
@@ -82,21 +55,7 @@ void App_Uart_RxProcess(void)
 		}
 		IntCtrl_Ip_EnableIrq(LPUART6_IRQn);
 	}
-	if (rxPacketCompleted)
-	{
-		if (rxPacketNum == 0U)
-		{
-			App_Uart_Send("Collect Command Key, Turn On Red LED");
-			App_Pwm_On_RedLed(rxPacketNum);
-		}
-		else if (rxPacketNum == 1U)
-		{
-			App_Standby_Enter();
-		}
-		Reset_Packet(&rxPacket);
-		rxPacketNum = 0xFFU;
-		rxPacketCompleted = FALSE;
-	}
+
 }
 
 void App_Uart_Callback(const uint8 channel, const Uart_EventType event)
@@ -105,33 +64,6 @@ void App_Uart_Callback(const uint8 channel, const Uart_EventType event)
 	if (event == UART_EVENT_RX_FULL)
 	{
 		uint32 next = (rxHead + 1U) % RX_BUFFER_SIZE;
-
-		/* Keep a completed packet until the main loop executes it. */
-		if (!rxPacketCompleted)
-		{
-			if (rxPacketNum == 0xFFU)
-			{
-				/* ASCII packet number: '0' + "950809", '1' + "950808". */
-				if (rxByte == '0' || rxByte == '1') { rxPacketNum = rxByte - '0'; }
-			}
-			else if ((rxPacket.u8RxPtr < (RX_PACKET_SIZE - 1U)) &&
-					 (rxByte == u8Cmd[rxPacketNum][rxPacket.u8RxPtr]))
-			{
-				rxPacket.u8RxPacket[rxPacket.u8RxPtr++] = rxByte;
-				rxPacket.u8RxPacket[rxPacket.u8RxPtr] = '\0';
-
-				if ((strcmp(rxPacket.u8RxPacket,u8Cmd[rxPacketNum]) == 0U))
-				{
-					rxPacketCompleted = TRUE;
-				}
-			}
-			else
-			{
-				/* Clear Rx Packet */
-				Reset_Packet(&rxPacket);
-				rxPacketNum = 0xFFU;
-			}
-		}
 
 		if (next != rxTail)
 		{

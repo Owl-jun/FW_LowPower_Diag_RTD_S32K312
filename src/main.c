@@ -13,6 +13,7 @@
 #include "WDG/App_Wdg.h"
 #include "GPT/App_Gpt.h"
 #include "APP/App_Standby.h"
+#include "APP/App_Command.h"
 
 
 /* MAIN */
@@ -33,7 +34,8 @@ int main(void)
     {
     	/* UART Rx and Btn(SW2) Input are handled by ISR */
 
-        App_Uart_RxProcess(); 		/* Uart Command Control Execution */
+        App_Uart_RxProcess();        /* UART receive recovery */
+        App_Command_Process();      /* Parse and execute commands in main */
         App_Pwm_Process();			/* Pwm Control by Btn(SW3) Input (Polling) */
         App_Gpt_Send_Time_Uart(); 	/* Send Elapsed Time Since Boot */
 
