@@ -1,4 +1,5 @@
 #include "App_Command.h"
+#include "../APP_CFG.h"
 #include "App_Standby.h"
 #include "../Uart/App_Uart.h"
 #include "../PWM/App_Pwm.h"
@@ -18,7 +19,7 @@ static void App_Command_Execute(uint8 command)
     if (command == 0U)
     {
         (void)App_Uart_Send("Collect Command Key, Turn On Red LED");
-        App_Pwm_On_RedLed(0U);
+        App_Pwm_On_RedLed(CFG_ON);
     }
     else if (command == 1U)
     {

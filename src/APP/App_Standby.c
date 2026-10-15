@@ -12,7 +12,6 @@ volatile App_Standby_BootInfoType App_Standby_BootInfo;
 #define APP_STANDBY_WKPU_MASK (1UL << 3U)
 
 #if (STANDBY_ENABLE == CFG_ENABLE)
-#include "../INIT/init.h"
 #include "../ADC/App_Adc.h"
 #include "Mcu.h"
 #include "Gpt.h"

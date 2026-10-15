@@ -18,7 +18,7 @@
 
 void App_Pwm_On_RedLed(uint8_t cmd)
 {
-	if (!cmd) { Pwm_SetDutyCycle(PwmChannel_0, DUTY_CYCLE_100_PERCENT); }
+	if (cmd) { Pwm_SetDutyCycle(PwmChannel_0, DUTY_CYCLE_100_PERCENT); }
 	else { Pwm_SetDutyCycle(PwmChannel_0, 0U); }
 }
 

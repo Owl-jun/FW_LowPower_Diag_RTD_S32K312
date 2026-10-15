@@ -1,11 +1,11 @@
 /*
- * init.c
+ * Platform_Init.c
  *
  *  Created on: 2026. 9. 17.
  *      Author: David.Kang
  */
 
-#include "init.h"
+#include "Platform_Init.h"
 #include "../APP_CFG.h"
 #include "Platform.h"
 #include "Mcu.h"
@@ -20,7 +20,7 @@
 #include "Siul2_Port_Ip.h"
 #include "../ADC/App_Adc.h"
 
-void ALL_COMPONENT_INIT(void)
+void Platform_InitHardware(void)
 {
 	Adc_ValueGroupType * ptrDmaBuf = App_Adc_Get_Dma_Result_Buf();
 
