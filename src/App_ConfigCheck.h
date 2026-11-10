@@ -29,9 +29,6 @@
 #error "ADC/DMA OFF is not supported yet: generated DMA callback still requires it"
 #endif
 
-#if (STANDBY_ENABLE == CFG_ENABLE) && (WATCHDOG_ENABLE == CFG_ENABLE)
-#error "Current Standby entry does not support an enabled watchdog"
-#endif
 #if (STANDBY_ENABLE == CFG_ENABLE) && (PWM_ENABLE != CFG_ENABLE)
 #error "Standby currently requires PWM initialization because it also initializes ICU"
 #endif

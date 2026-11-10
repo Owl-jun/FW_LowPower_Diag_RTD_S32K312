@@ -35,8 +35,11 @@ static void App_Command_Execute(uint8 command)
     }
     else if (command == 1U)
     {
+    	(void)App_Log_Write("Collect Command Key, Try to Enter Standby Mode");
 #if (STANDBY_ENABLE == CFG_ENABLE)
         App_Standby_Enter();
+#else
+        (void)App_Log_Write("Fail : STANDBY_ENABLE != CFG_ENABLE Check the APP_CFG.h");
 #endif
     }
 }

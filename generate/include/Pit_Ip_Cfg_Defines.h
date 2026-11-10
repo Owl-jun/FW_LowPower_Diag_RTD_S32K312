@@ -113,7 +113,7 @@ extern "C"{
 * @brief    PIT_IP_TICKS_PER_SECOND define
 * @details  This define contains the ticks number per seconds based on which clock source is configured; Used just in Non-Autosar Context
 */
-#define PIT_IP_TICKS_PER_SECOND    (48000000)UL
+#define PIT_IP_TICKS_PER_SECOND    (24000000)UL
 #define PIT_IP_MDIS_BIT_EXISTS    (STD_ON)
 
 /*==================================================================================================

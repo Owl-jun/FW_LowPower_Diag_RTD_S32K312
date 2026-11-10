@@ -71,7 +71,7 @@ boolean Plat_Standby_IsAvailable(void)
 {
 #if (STANDBY_ENABLE == CFG_ENABLE)
     if ((PIT_IP_USED == CFG_ON) && (PIT_IP_RTI_USED == CFG_ON) &&
-        (WKPU_IP_USED == CFG_ON) && (WATCHDOG_ENABLE == CFG_DISABLE))
+        (WKPU_IP_USED == CFG_ON))
     {
         return TRUE;
     }

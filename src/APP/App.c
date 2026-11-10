@@ -2,11 +2,11 @@
 #include "App_Command.h"
 #include "app_color_change_btn.h"
 #include "App_Standby.h"
-#include "../platform/Platform_Init.h"
 #include "App_Pwm.h"
+#include "App_Telemetry.h"
+#include "../platform/Platform_Init.h"
 #include "../platform/Uart_Port.h"
 #include "../platform/Timebase.h"
-#include "App_Telemetry.h"
 #include "../platform/Wdg_Port.h"
 
 void App_Init(void)

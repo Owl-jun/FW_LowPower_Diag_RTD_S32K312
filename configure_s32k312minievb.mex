@@ -530,6 +530,11 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
+            <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data>true</data>
+               </feature>
+            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="generate/include/Adc_Cfg.h" update_enabled="true"/>
@@ -1684,7 +1689,7 @@
                                  <array name="McuClockReferencePoint">
                                     <struct name="0">
                                        <setting name="Name" value="McuClockReferencePoint_0"/>
-                                       <setting name="McuClockFrequencySelect" value="CORE_CLK"/>
+                                       <setting name="McuClockFrequencySelect" value="AIPS_SLOW_CLK"/>
                                     </struct>
                                  </array>
                               </struct>

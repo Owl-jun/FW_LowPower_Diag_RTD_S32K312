@@ -11,7 +11,7 @@
 
 /* Only settings that differ between profiles belong here. */
 #if (BUILD_MODE == BM_DEVELOPE)
-#define WATCHDOG_ENABLE 		(CFG_DISABLE)
+#define WATCHDOG_ENABLE 		(CFG_DISABLE) // (CFG_ENABLE)
 #define UART_LOG_ENABLE 		(CFG_ENABLE)
 #define _DEBUG_ADC_ 			(CFG_ON)
 #elif (BUILD_MODE == BM_RELEASE)
@@ -33,10 +33,8 @@
 /* The current ADC acquisition implementation always uses DMA. */
 #define DMA_ENABLE 					(ADC_ENABLE)
 
-/* Current Standby implementation rejects entry while watchdog is enabled.
- * Release therefore has Standby disabled explicitly instead of advertising
- * a feature that would be rejected at runtime. */
-#define STANDBY_ENABLE 				(WATCHDOG_ENABLE == CFG_DISABLE)
+/* Low Power Mode Configuration */
+#define STANDBY_ENABLE 				(CFG_ENABLE)
 
 #include "App_ConfigCheck.h"
 

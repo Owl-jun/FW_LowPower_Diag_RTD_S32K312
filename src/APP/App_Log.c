@@ -2,6 +2,7 @@
 #include "../APP_CFG.h"
 
 #if (UART_LOG_ENABLE == CFG_ENABLE) && (UART_ENABLE == CFG_ENABLE)
+
 #include "../platform/Uart_Port.h"
 #include <stdarg.h>
 #include <stdio.h>
