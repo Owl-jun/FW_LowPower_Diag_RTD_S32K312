@@ -11,7 +11,8 @@
 /* RTD DMA completion entry point, normally selected as the MCL callback. */
 extern void Adc_Ipw_Adc0DmaTransferCompleteNotification(void);
 
-static Adc_ValueGroupType aDmaBuf[ADC_DMA_RESULT_BUF_SIZE] __attribute__((section(".mcal_bss_no_cacheable"), aligned(32)));
+static Adc_ValueGroupType aDmaBuf[ADC_DMA_RESULT_BUF_SIZE]
+								  __attribute__((section(".mcal_bss_no_cacheable"), aligned(32)));
 volatile Std_ReturnType Plat_Adc_SetupResult = E_NOT_OK;
 
 #if (_DEBUG_ADC_ == CFG_ON)

@@ -10,13 +10,6 @@ uint32_t Plat_Timebase_GetElapsedSec(void)
 
 void Plat_Timebase_Stm0Notification(void)
 {
-    static uint8_t elapsedTicks;
-
-    elapsedTicks++;
-    if (elapsedTicks >= 10U)
-    {
-        elapsedSec++;
-        elapsedTicks = 0U;
-    }
+	elapsedSec++;
 }
 #endif

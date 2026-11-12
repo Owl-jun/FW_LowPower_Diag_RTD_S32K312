@@ -120,7 +120,7 @@ extern "C"{
 #define ICU_PRECOMPILE_SUPPORT
 
 /** @brief Maximum number of ICU channels configured. */
-#define ICU_MAX_CHANNEL                 ((Icu_ChannelType)2U)
+#define ICU_MAX_CHANNEL                 ((Icu_ChannelType)3U)
 
 /**
 *   @brief  Switches the Development Error Detection and Notification on or off.
@@ -182,7 +182,7 @@ extern "C"{
 *        STD_OFF: Icu_DisableWakeup() can not be used.
 *   @implements ICU_DISABLE_WAKEUP_API_define
 */
-#define ICU_DISABLE_WAKEUP_API            (STD_OFF)
+#define ICU_DISABLE_WAKEUP_API            (STD_ON)
 
 /**
 *   @brief  Adds or removes the service Icu_EnableWakeup() from the code.
@@ -190,7 +190,7 @@ extern "C"{
 *        STD_OFF: Icu_EnableWakeup() can not be used.
 *   @implements ICU_ENABLE_WAKEUP_API_define
 */
-#define ICU_ENABLE_WAKEUP_API             (STD_OFF)
+#define ICU_ENABLE_WAKEUP_API             (STD_ON)
 
 /**
 *   @brief  Adds or removes all services related to the timestamping functionality as listed
@@ -370,6 +370,8 @@ extern "C"{
 #define IcuConf_IcuChannel_IcuChannel_0  ((Icu_ChannelType)0U)
 #define IcuChannel_1                     (IcuConf_IcuChannel_IcuChannel_1)
 #define IcuConf_IcuChannel_IcuChannel_1  ((Icu_ChannelType)1U)
+#define IcuChannel_2                     (IcuConf_IcuChannel_IcuChannel_2)
+#define IcuConf_IcuChannel_IcuChannel_2  ((Icu_ChannelType)2U)
 
 /**
 * @brief          Number of configured partitions.

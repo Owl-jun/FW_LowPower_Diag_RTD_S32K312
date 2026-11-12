@@ -11,7 +11,7 @@
 
 /* Only settings that differ between profiles belong here. */
 #if (BUILD_MODE == BM_DEVELOPE)
-#define WATCHDOG_ENABLE 		(CFG_DISABLE) // (CFG_ENABLE)
+#define WATCHDOG_ENABLE 		(CFG_ENABLE) // (CFG_ENABLE) (CFG_DISABLE)
 #define UART_LOG_ENABLE 		(CFG_ENABLE)
 #define _DEBUG_ADC_ 			(CFG_ON)
 #elif (BUILD_MODE == BM_RELEASE)
@@ -35,6 +35,8 @@
 
 /* Low Power Mode Configuration */
 #define STANDBY_ENABLE 				(CFG_ENABLE)
+#define WFI_BY_RTI_10SEC			(CFG_DISABLE)
+#define STANDBY_DEMONSTRATION_MODE	(CFG_ENABLE)
 
 #include "App_ConfigCheck.h"
 

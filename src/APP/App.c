@@ -22,9 +22,6 @@ void App_Init(void)
     App_Standby_CaptureBootInfo();
 #endif
     Plat_InitHardware();
-#if (STANDBY_ENABLE == CFG_ENABLE)
-    App_Standby_ReportBootInfo();
-#endif
     if (Plat_Uart_Recv_Async() != E_OK)
     {
 #if (BUILD_MODE == BM_RELEASE)

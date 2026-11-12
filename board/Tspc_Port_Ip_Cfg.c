@@ -109,12 +109,12 @@ PortContainer_0_BOARD_InitPeripherals:
   - {pin_num: '32', peripheral: eMIOS_1, signal: emios_1_ch_12_h, pin_signal: PTA29, direction: OUTPUT, pullSelect: pullUp, pullEnable: enabled, InitValue: state_1}
   - {pin_num: '39', peripheral: SIUL2, signal: 'gpio, 31', pin_signal: PTA31, direction: OUTPUT, pullSelect: pullUp, pullEnable: enabled, InitValue: state_1}
   - {pin_num: '33', peripheral: SIUL2, signal: 'gpio, 30', pin_signal: PTA30, direction: OUTPUT, pullSelect: pullUp, pullEnable: enabled, InitValue: state_1}
-  - {pin_num: '43', peripheral: SIUL2, signal: 'gpio, 51', pin_signal: PTB19, direction: INPUT}
   - {pin_num: '152', peripheral: eMIOS_1, signal: emios_1_ch_4_h, pin_signal: PTA14, direction: OUTPUT}
   - {pin_num: '145', peripheral: LPUART6, signal: lpuart6_rx, pin_signal: PTA15}
   - {pin_num: '143', peripheral: LPUART6, signal: lpuart6_tx, pin_signal: PTA16, direction: OUTPUT}
   - {pin_num: '135', peripheral: ADC0, signal: adc0_s9, pin_signal: PTA1}
   - {pin_num: '124', peripheral: WKPU, signal: 'wkpu, 0', pin_signal: PTA2}
+  - {pin_num: '43', peripheral: WKPU, signal: 'wkpu, 38', pin_signal: PTB19}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

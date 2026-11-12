@@ -19,6 +19,7 @@
 #include "CDD_Rm.h"
 #include "Siul2_Port_Ip.h"
 #include "Adc_Port.h"
+#include "../APP/App_Standby.h"
 
 void Plat_InitHardware(void)
 {
@@ -81,6 +82,9 @@ void Plat_InitHardware(void)
 #if (UART_ENABLE == CFG_ENABLE)
 	/* UART */
 	Uart_Init(NULL_PTR);
+#if (STANDBY_ENABLE == CFG_ENABLE)
+    App_Standby_ReportBootInfo();
+#endif
 #endif
 
 #if (ADC_ENABLE == CFG_ENABLE && DMA_ENABLE == CFG_ENABLE)
@@ -101,7 +105,7 @@ void Plat_InitHardware(void)
 #endif
 
 #if (TIMEBASE_ENABLE == CFG_ENABLE)
-	/* Clock Source : 48MHz, 4800000tick is 100ms */
-	Gpt_StartTimer(0U, 4800000U);
+	/* Clock Source : 48MHz, 48000000tick is 1s */
+	Gpt_StartTimer(0U, 48000000U);
 #endif
 }

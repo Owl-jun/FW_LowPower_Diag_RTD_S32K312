@@ -29,18 +29,28 @@ static void App_Command_Execute(uint8 command)
     if (command == 0U)
     {
         (void)App_Log_Write("Collect Command Key, Turn On Red LED");
+
 #if (PWM_ENABLE == CFG_ENABLE)
         App_Pwm_On_RedLed(CFG_ON);
 #endif
     }
     else if (command == 1U)
     {
+
+#if (STANDBY_DEMONSTRATION_MODE == CFG_ENABLE)
     	(void)App_Log_Write("Collect Command Key, Try to Enter Standby Mode");
-#if (STANDBY_ENABLE == CFG_ENABLE)
-        App_Standby_Enter();
-#else
-        (void)App_Log_Write("Fail : STANDBY_ENABLE != CFG_ENABLE Check the APP_CFG.h");
+	#if (STANDBY_ENABLE == CFG_ENABLE)
+			App_Standby_Enter();
+	#else
+			(void)App_Log_Write("Fail : STANDBY_ENABLE != CFG_ENABLE Check the APP_CFG.h");
+	#endif
 #endif
+
+        (void)App_Log_Write("Collect Command Key, Turn Off Red LED");
+#if (PWM_ENABLE == CFG_ENABLE)
+        App_Pwm_On_RedLed(CFG_OFF);
+#endif
+
     }
 }
 

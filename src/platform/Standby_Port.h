@@ -19,7 +19,9 @@ typedef enum
     PLAT_STANDBY_CLOCK_FAILED,
     PLAT_STANDBY_ARM_FAILED,
     PLAT_STANDBY_UNEXPECTED_RETURN,
-    PLAT_STANDBY_QUIESCE_FAILED
+    PLAT_STANDBY_QUIESCE_FAILED,
+    PLAT_STANDBY_WDG_DEINIT_FAILED,
+    PLAT_STANDBY_RESET_CLEAR_FAILED
 } Plat_Standby_StageType;
 
 typedef struct
@@ -28,6 +30,7 @@ typedef struct
     uint32 resetDes;
     uint32 resetFes;
     uint32 wkpuWisr;
+    uint32 wkpuWisr64;
     boolean fromStandby;
     boolean fromRti;
 } Plat_Standby_BootInfoType;

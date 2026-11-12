@@ -13,6 +13,10 @@
 
 #include "App_Log.h"
 
+#if (STANDBY_ENABLE == CFG_ENABLE)
+#include "App_Standby.h"
+#endif
+
 typedef enum ColorType
 {
 	COL_OFF = 0U,
@@ -56,6 +60,14 @@ void App_ColorButton_Process(void)
 
 #if (PWM_ENABLE == CFG_ENABLE)
     Plat_Pwm_SetRedDuty(0U);
+#endif
+
+#if (STANDBY_DEMONSTRATION_MODE == CFG_ENABLE)
+	#if (STANDBY_ENABLE == CFG_ENABLE)
+        	App_Standby_Enter();
+	#else
+        	(void)App_Log_Write("Fail : STANDBY_ENABLE != CFG_ENABLE Check the APP_CFG.h");
+	#endif
 #endif
 
 	if (eColType == COL_OFF)

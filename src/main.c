@@ -15,7 +15,7 @@ int main(void)
 
     for(;;)	/* Main Loop */
     {
-        App_Process();
+    	App_Process();
     }
 
     return 0U;
