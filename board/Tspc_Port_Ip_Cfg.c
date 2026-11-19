@@ -115,6 +115,7 @@ PortContainer_0_BOARD_InitPeripherals:
   - {pin_num: '135', peripheral: ADC0, signal: adc0_s9, pin_signal: PTA1}
   - {pin_num: '124', peripheral: WKPU, signal: 'wkpu, 0', pin_signal: PTA2}
   - {pin_num: '43', peripheral: WKPU, signal: 'wkpu, 38', pin_signal: PTB19}
+  - {pin_num: '8', peripheral: WKPU, signal: 'wkpu, 6', pin_signal: PTD0}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

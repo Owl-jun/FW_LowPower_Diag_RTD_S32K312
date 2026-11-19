@@ -1037,7 +1037,7 @@ static const Clock_Ip_IrcoscConfigType Clock_Ip_IrcoscConfigurations_1[CLOCK_IP_
         FIRC_CLK,                   /* name */
         1U,                     /* Always enabled. */
         0U,                     /* Enable regulator */
-        CLOCK_IP_SUPPORTS_48MHZ_FREQUENCY,                     /* Ircosc range */
+        CLOCK_IP_SUPPORTS_24MHZ_FREQUENCY,                     /* Ircosc range */
         0U,                     /* Ircosc enable in VLP mode */
         0U,                     /* Ircosc enable in STOP mode */
     },
@@ -1806,7 +1806,7 @@ static const Clock_Ip_CmuConfigType Clock_Ip_CmuConfigurations_1[CLOCK_IP_CONFIG
         ),
         CLOCK_IP_MAXIMUM_5_PERCENTAGE_DEVIATION,            /* Monitor maximum allowed frequency variation. */
         CLOCK_IP_LOWEST_LATENCY,            /* Latency of clock monitor reaction. */
-        48000000U,
+        24000000U,
         {
                 0U,          /* Start index in register values array */
                 0U,          /* End index in register values array */
@@ -1825,7 +1825,7 @@ static const Clock_Ip_CmuConfigType Clock_Ip_CmuConfigurations_1[CLOCK_IP_CONFIG
         ),
         CLOCK_IP_MAXIMUM_5_PERCENTAGE_DEVIATION,            /* Monitor maximum allowed frequency variation. */
         CLOCK_IP_LOWEST_LATENCY,            /* Latency of clock monitor reaction. */
-        48000000U,
+        24000000U,
         {
                 0U,          /* Start index in register values array */
                 0U,          /* End index in register values array */
@@ -1844,7 +1844,7 @@ static const Clock_Ip_ConfiguredFrequencyType Clock_Ip_ConfiguredFrequencyConfig
     #if CLOCK_IP_CONFIGURED_FREQUENCIES_COUNT > 1U
     {
         FIRC_CLK,
-        48000000U,
+        24000000U,
     },
     #endif
     #if CLOCK_IP_CONFIGURED_FREQUENCIES_COUNT > 2U
@@ -1856,19 +1856,19 @@ static const Clock_Ip_ConfiguredFrequencyType Clock_Ip_ConfiguredFrequencyConfig
     #if CLOCK_IP_CONFIGURED_FREQUENCIES_COUNT > 3U
     {
         CORE_CLK,
-        48000000U,
+        24000000U,
     },
     #endif
     #if CLOCK_IP_CONFIGURED_FREQUENCIES_COUNT > 4U
     {
         AIPS_PLAT_CLK,
-        48000000U,
+        24000000U,
     },
     #endif
     #if CLOCK_IP_CONFIGURED_FREQUENCIES_COUNT > 5U
     {
         AIPS_SLOW_CLK,
-        24000000U,
+        12000000U,
     },
     #endif
 };

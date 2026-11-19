@@ -20,3 +20,4 @@ void App_Telemetry_Process(void)
         previousSec = currentSec;
     }
 }
+

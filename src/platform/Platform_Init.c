@@ -44,14 +44,15 @@ void Plat_InitHardware(void)
 #elif (INIT_BOOT_MODE == BOOT_STANDBY)
 	/* MCU Set Mode 1 (STANDBY)
 	 * If selected boot mode 1, CPU State is to wait for interrupt(WFI),
-	 * not execute below SW codes and wake-up by RTI request (wake-up after about 10-second)
+	 * not execute below SW codes and wake-up by RTI request (if use WAKEUP_BY_RTI_10SEC)
 	 * */
 	Mcu_SetMode(1U);
 #endif
 
-
-/* WATCHDOG */
+#if (WATCHDOG_ENABLE == CFG_ENABLE)
+	/* WATCHDOG */
 	Plat_Wdg_Init();
+#endif
 
 #if (TIMEBASE_ENABLE == CFG_ENABLE)
 	/* STM0 in GPT Timer */
@@ -82,9 +83,9 @@ void Plat_InitHardware(void)
 #if (UART_ENABLE == CFG_ENABLE)
 	/* UART */
 	Uart_Init(NULL_PTR);
-#if (STANDBY_ENABLE == CFG_ENABLE)
-    App_Standby_ReportBootInfo();
-#endif
+	#if (STANDBY_ENABLE == CFG_ENABLE)
+    	App_Standby_ReportBootInfo();
+	#endif
 #endif
 
 #if (ADC_ENABLE == CFG_ENABLE && DMA_ENABLE == CFG_ENABLE)

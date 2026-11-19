@@ -35,8 +35,10 @@
 
 /* Low Power Mode Configuration */
 #define STANDBY_ENABLE 				(CFG_ENABLE)
-#define WFI_BY_RTI_10SEC			(CFG_DISABLE)
+#define WAKEUP_BY_RTI_10SEC			(CFG_DISABLE)
 #define STANDBY_DEMONSTRATION_MODE	(CFG_ENABLE)
+
+#define TEST_WAKE_UP
 
 #include "App_ConfigCheck.h"
 

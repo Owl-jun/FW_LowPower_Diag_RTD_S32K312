@@ -22,11 +22,17 @@
 #if (UART_ENABLE != CFG_ENABLE)
 #error "UART OFF is not supported yet: startup and generated callback still require it"
 #endif
+
+#if (ADC_ENABLE != CFG_ENABLE)
+#error "ADC OFF is not supported yet: startup and generated callback still require it"
+#endif
+
+#if (PWM_ENABLE != CFG_ENABLE)
+#error "PWM OFF is not supported yet: startup and generated callback still require it"
+#endif
+
 #if (TIMEBASE_ENABLE != CFG_ENABLE)
 #error "Timebase OFF is not supported yet: generated GPT callback still requires it"
-#endif
-#if (ADC_ENABLE != CFG_ENABLE) || (DMA_ENABLE != CFG_ENABLE)
-#error "ADC/DMA OFF is not supported yet: generated DMA callback still requires it"
 #endif
 
 #if (STANDBY_ENABLE == CFG_ENABLE) && (PWM_ENABLE != CFG_ENABLE)

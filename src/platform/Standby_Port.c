@@ -26,16 +26,40 @@
 #include "Wdg_Port.h"
 #include "../APP/App_Log.h"
 #include "Swt_Ip.h"
+#include "Siul2_Port_Ip_Cfg.h"
 
 volatile Plat_Standby_StageType Plat_Standby_Stage;
 volatile Plat_Standby_BootInfoType Plat_Standby_BootInfo;
 
 #define PLAT_STANDBY_WKPU_MASK (1UL << 3U)
+#define PLAT_STANDBY_WKPU_PTA2_PAD (2U)
+#define PLAT_STANDBY_WKPU_PTB19_PAD (51U)
+#define PLAT_STANDBY_WKPU_PTD0_PAD (96U)
 
 /* Generated logical channel names; IcuChannel_1 maps to WKPU source 3. */
 #define PLAT_STANDBY_CLOCK McuConf_McuClockSettingConfig_StandbyClock
 #define PLAT_STANDBY_TIMER GptConf_GptChannelConfiguration_StandbyRti
 #define PLAT_STANDBY_WAKE_CHANNEL IcuConf_IcuChannel_IcuChannel_1
+
+static void Plat_Standby_PreparePads(void)
+{
+    uint32 index;
+
+    /* Standby latches the pad state. Leave the external wake inputs usable. */
+    for (index = 0U; index < NUM_OF_CONFIGURED_PINS_PortContainer_0_BOARD_InitPeripherals; ++index)
+    {
+        const Siul2_Port_Ip_PinSettingsConfig * const pin =
+            &g_pin_mux_InitConfigArr_PortContainer_0_BOARD_InitPeripherals[index];
+
+        if ((pin->pinPortIdx != PLAT_STANDBY_WKPU_PTA2_PAD) &&
+            (pin->pinPortIdx != PLAT_STANDBY_WKPU_PTB19_PAD) &&
+			(pin->pinPortIdx != PLAT_STANDBY_WKPU_PTD0_PAD))
+        {
+            pin->base->MSCR[pin->pinPortIdx] &=
+                ~(SIUL2_MSCR_OBE_MASK | SIUL2_MSCR_IBE_MASK | SIUL2_MSCR_PUE_MASK);
+        }
+    }
+}
 
 static void Plat_Standby_Halt(Plat_Standby_StageType reason)
 {
@@ -78,33 +102,18 @@ boolean Plat_Standby_IsAvailable(void)
 void Plat_Standby_Enter(void)
 {
 #if (STANDBY_ENABLE == CFG_ENABLE)
-#if (WFI_BY_RTI_10SEC == CFG_ENABLE)
+#if (WAKEUP_BY_RTI_10SEC == CFG_ENABLE)
     uint32 rtiControl;
 #endif
-    uint32 resetDes;
-    uint32 resetFes;
-    uint32 clearedDes;
-    uint32 clearedFes;
+
+    volatile uint32_t wisr = IP_WKPU->WISR;
+    volatile uint32_t wisr_64 = IP_WKPU->WISR_64;
     if (!Plat_Standby_IsAvailable()) { return; }
 
-    resetDes = IP_MC_RGM->DES;
-    resetFes = IP_MC_RGM->FES;
-    (void)App_Log_Printf("STANDBY PRE DES=%08lx FES=%08lx SWT0_CR=%08lx",
-        (unsigned long)resetDes, (unsigned long)resetFes,
-        (unsigned long)IP_SWT_0->CR);
-    /* W1C: write the captured flags directly, without read-modify-write. */
-    IP_MC_RGM->DES = resetDes;
-    IP_MC_RGM->FES = resetFes;
+
     MCAL_DATA_SYNC_BARRIER();
-    clearedDes = IP_MC_RGM->DES;
-    clearedFes = IP_MC_RGM->FES;
-    (void)App_Log_Printf("STANDBY CLEAR DES=%08lx FES=%08lx result=%s",
-        (unsigned long)clearedDes, (unsigned long)clearedFes,
-        ((clearedDes == 0U) && (clearedFes == 0U)) ? "OK" : "FAILED");
-    if ((clearedDes != 0U) || (clearedFes != 0U))
-    {
-        Plat_Standby_Halt(PLAT_STANDBY_RESET_CLEAR_FAILED);
-    }
+    (void)App_Log_Printf("[Standby Enter] : WISR=%08lx WISR_64=%08lx",
+        (unsigned long)wisr, (unsigned long)wisr_64);
 
     if (Plat_Wdg_Deinit() != E_OK)
     {
@@ -113,7 +122,7 @@ void Plat_Standby_Enter(void)
         Plat_Standby_Halt(PLAT_STANDBY_WDG_DEINIT_FAILED);
     }
     (void)App_Log_Printf("STANDBY ENTRY SWT0_CR=%08lx RTI_10SEC=%u",
-        (unsigned long)IP_SWT_0->CR, (unsigned int)WFI_BY_RTI_10SEC);
+        (unsigned long)IP_SWT_0->CR, (unsigned int)WAKEUP_BY_RTI_10SEC);
     Plat_Standby_Stage = PLAT_STANDBY_PREPARING;
 
 #if (TIMEBASE_ENABLE == CFG_ENABLE)
@@ -137,7 +146,9 @@ void Plat_Standby_Enter(void)
 
     /* Stop PWM outputs before the eMIOS clocks change. Mcl stays initialized
      * because it owns the shared DMA/trigger resources. */
+#if (PWM_ENABLE == CFG_ENABLE)
     Pwm_DeInit();
+#endif
     IntCtrl_Ip_DisableIrq(SIUL_1_IRQn);
 
 #if (UART_ENABLE == CFG_ENABLE)
@@ -170,6 +181,8 @@ void Plat_Standby_Enter(void)
     IntCtrl_Ip_ClearPending(LPUART6_IRQn);
 #endif
 
+    Plat_Standby_PreparePads();
+
     /* Generated FIRC configuration switches consumers away from PLL before
      * disabling it. Do not call Mcu_DistributePllClock for this configuration. */
     if (Mcu_InitClock(PLAT_STANDBY_CLOCK) != E_OK)
@@ -186,11 +199,18 @@ void Plat_Standby_Enter(void)
     IntCtrl_Ip_ClearPending(WKPU_IRQn);
     Icu_EnableEdgeDetection(IcuConf_IcuChannel_IcuChannel_1);
     Icu_EnableEdgeDetection(IcuConf_IcuChannel_IcuChannel_2);
+    Icu_EnableEdgeDetection(IcuConf_IcuChannel_IcuChannel_3);
     Gpt_EnableNotification(PLAT_STANDBY_TIMER);
-    /* Wake-Up and Interrupt Falling-Edge Event Enable Register (WIFEER_64)*/
-    *(volatile unsigned int *)0x402B406C = (1UL << (42U - 32U));
 
-#if (WFI_BY_RTI_10SEC == CFG_ENABLE)
+    /* Wake-Up and Interrupt Rising-Edge Event Enable Register (WIREER)*/
+    IP_WKPU->WIREER 	= (1UL << (10U));
+    /* Wake-Up and Interrupt Falling-Edge Event Enable Register (WIFEER_64)*/
+    IP_WKPU->WIFEER_64 	= (1UL << (42U - 32U));
+
+    IP_WKPU->IRER 		&= ~(1UL << (10U));		/* IRER DISABLE */
+    IP_WKPU->WRER	 	&= ~(1UL << (10U));		/* WRER DISABLE */
+
+#if (WAKEUP_BY_RTI_10SEC == CFG_ENABLE)
     Gpt_StartTimer(PLAT_STANDBY_TIMER,
         PLAT_STANDBY_RTI_CLOCK_HZ * PLAT_STANDBY_DELAY_SECONDS);
 
@@ -206,7 +226,6 @@ void Plat_Standby_Enter(void)
     Plat_Standby_Stage = PLAT_STANDBY_ARMED;
     MCAL_DATA_SYNC_BARRIER();
     Plat_Standby_Stage = PLAT_STANDBY_REQUESTED;
-//    EXECUTE_WAIT();
     Mcu_SetMode(McuModeSettingConf_1);
 
     /* Normal SoC Standby wake-up is expected through Reset_Handler/main.
