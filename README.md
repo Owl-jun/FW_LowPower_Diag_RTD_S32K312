@@ -124,7 +124,7 @@ UART 명령 또는 색상 버튼 이벤트
 
 기본값은 `WAKEUP_BY_RTI_10SEC = CFG_DISABLE`입니다. SW2는 PTB19에 연결된 WKPU 하드웨어 채널 42의 하강 에지로 설정됩니다. 진입 코드는 PTD0의 채널 10을 준비한 뒤 해당 채널의 인터럽트와 wakeup을 해제합니다. 소스 3 상태는 부팅 로그에 `shared-source3`으로 표시합니다.
 
-RTI 옵션 `WAKEUP_BY_RTI_10SEC`를 켜면 현재 소스는 PIT0 RTI에 `120,000,000 ticks`를 전달합니다. 이 값은 `Standby_Port.h`의 상수 `12,000,000 × 10`에서 계산됩니다. Standby 클록 설정에는 SIRC 32 kHz와 Standby 중 SIRC 유지가 지정되어 있습니다. 10초에 필요한 tick 수는 실제 PIT0 RTI 입력 클록을 확인해 계산합니다. 예를 들어 입력이 24 kHz이면 `24,000 × 10 = 240,000 ticks`입니다.
+RTI 옵션 `WAKEUP_BY_RTI_10SEC`를 켜면 현재 소스는 PIT0 RTI에 `120,000,000 ticks`를 전달합니다. 이 값은 `Standby_Port.h`의 상수 `12,000,000 × 10`에서 계산됩니다. Standby 클록 설정에는 SIRC 32 kHz와 Standby 중 SIRC 유지가 지정되어 있습니다.
 
 정상 wakeup은 `Reset_Handler → main()` 재기동 경로에서 확인합니다. 초기화 전에 `MODE_STAT`, `DES`, `FES`, `WISR`, `WISR_64`를 저장합니다. `TEST_WAKE_UP`가 정의된 기본 설정에서는 SW2와 채널 10의 입력 상태도 진단 로그로 출력합니다. 진입 준비 중 실패하거나 `Mcu_SetMode()`가 반환하면 진행 단계를 기록하고 정지합니다.
 
